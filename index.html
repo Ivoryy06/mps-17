@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="https://snapwidget.com/js/snapwidget.js"></script>
+  <meta charset="UTF-8">
+  <title>MPS 17 Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="pagehome.css?v=7">
+
+  <style>
+    /* ==============================
+       1. CORE RESET & BASE STYLES
+       ============================== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #fff;
+      background-color: #111;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* ==============================
+       2. HERO SECTION
+       ============================== */
+    .hero {
+      /* Default Desktop Height */
+      min-height: 70vh; 
+      position: relative;
+      /* Ensure you have a valid image here or a fallback color */
+      background: url("background.jpg") center/cover no-repeat;
+      background-color: #222; /* Fallback if image missing */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1.5rem;
+      text-align: center;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      z-index: 1;
+    }
+
+    /* Header Styling */
+    .hero header {
+      position: relative;
+      z-index: 2;
+      margin-bottom: 1rem;
+      /* Added margin top to ensure it doesn't hit the top edge on mobile */
+      margin-top: 2rem; 
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: rgba(255,255,255,0.85);
+    }
+
+    /* ==============================
+       3. NAVIGATION (Desktop & Mobile)
+       ============================== */
+    
+    /* Desktop Nav Links */
+    .hero-links {
+      position: absolute;
+      top: 1.2rem;
+      right: 1.5rem;
+      display: flex;
+      gap: 0.75rem;
+      z-index: 3;
+    }
+
+    .hero-links a {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: white;
+      text-decoration: none;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.35);
+      backdrop-filter: blur(4px);
+      transition: background 0.2s ease;
+    }
+
+    .hero-links a:hover {
+      background: rgba(0,0,0,0.55);
+      opacity: 0.8;
+    }
+
+    /* Hamburger Icon */
+    .hamburger {
+      font-size: 2rem;
+      color: white;
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    /* Mobile Menu Overlay */
+    .mobile-menu {
+      display: none; /* Hidden by default */
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.95);
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 1.5rem;
+      z-index: 9;
+    }
+
+    .mobile-menu a {
+      font-size: 2rem;
+      color: white;
+    }
+
+    /* UI Toggles */
+    .desktop-ui { display: block; }
+    .mobile-ui { display: none; }
+
+    /* ==============================
+       4. TEAM MEMBERS LAYOUT
+       ============================== */
+    .team {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 2rem;
+      width: 100%;
+    }
+
+    .team h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .team ul {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      width: 100%;
+      max-width: 1100px;
+      padding: 0 1.5rem;
+    }
+
+    .team li {
+      background: rgba(0,0,0,0.55);
+      color: white;
+      padding: 1rem;
+      border-radius: 10px;
+      backdrop-filter: blur(6px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .team li img {
+      width: 100%;
+      border-radius: 6px;
+      margin-top: 0.5rem;
+    }
+
+    .team li:hover {
+      transform: translateY(-8px); 
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    /* ==============================
+       5. WIDGETS & CAROUSEL
+       ============================== */
+    .insta-single {
+      width: 100%;
+      margin-top: 0.5rem;
+      border-radius: 6px;
+      overflow: hidden;
+      line-height: 0;
+    }
+    .insta-single iframe {
+      width: 100% !important;
+      min-height: 320px;
+      border: 0;
+      display: block;
+    }
+
+    .insta-carousel {
+      display: flex;
+      gap: 0.5rem;
+      overflow-x: auto;
+      padding: 0.5rem 0;
+      scroll-snap-type: x mandatory;
+      width: 100%; /* Ensure it fits container */
+    }
+
+    .insta-carousel img {
+      width: 100px; /* Adjusted for card size */
+      height: 100px;
+      object-fit: cover;
+      border-radius: 8px;
+      flex: 0 0 auto;
+      scroll-snap-align: start;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .insta-carousel img:hover {
+      transform: scale(1.05);
+    }
+
+    /* ==============================
+       6. UTILITIES (Bio, Lazy, Lightbox)
+       ============================== */
+    .bio {
+      display: none;
+      margin-top: 0.75rem;
+      font-size: 0.9rem;
+      color: #ddd;
+    }
+
+    .toggle-bio {
+      margin-top: 0.5rem;
+      background: rgba(255,255,255,0.1);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 0.3rem 0.6rem;
+      cursor: pointer;
+    }
+
+    .lazy {
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+    .lazy.loaded {
+      opacity: 1;
+    }
+
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.9);
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 8px;
+    }
+
+    /* ==============================
+       7. RESPONSIVE / MEDIA QUERIES
+       ============================== */
+    
+    @media (max-width: 768px) {
+      .team ul {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      /* === CRITICAL FIX FOR GAP === */
+      .hero {
+        min-height: auto; /* Remove fixed height */
+        padding-bottom: 3rem;
+      }
+
+      .desktop-ui { display: none; }
+      .mobile-ui { display: block; }
+      
+      .team ul {
+        grid-template-columns: 1fr;
+      }
+      
+      .hero h1 {
+        font-size: 1.8rem; /* Smaller font for mobile */
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<section class="hero">
+
+  <header>
+    <h1>MPS 17 Portfolio</h1>
+    <p>Portfolio anggota MPS angkatan 17</p>
+  </header>
+
+  <div class="desktop-ui">
+    <nav class="hero-links">
+      <a href="about.html">About</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+
+  <div class="mobile-ui">
+    <div class="hamburger" id="hamburger">&#9776;</div>
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="about.html">About</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+
+  <div class="team">
+    <h2>TEAM MEMBERS</h2>
+
+    <ul>
+      <li data-link="members/member1.html">
+        <h3>Matheuw<br>
+        Photographer + Videographer</h3>
+        
+        <div class="insta-single">
+          <iframe 
+    src="https://snapwidget.com/embed/1118130"
+    class="snapwidget-widget"
+    allowtransparency="true"
+    frameborder="0"
+    scrolling="no"
+    style="border:none; overflow:hidden; width:100%;"
+    title="Posts from Instagram">
+            
+          </iframe>
+          </div>
+
+        <div class="insta-carousel">
+          <img class="lazy" src="placeholder.jpg" data-src="insta1a.jpg">
+          <img class="lazy" src="placeholder.jpg" data-src="insta1b.jpg">
+          <img class="lazy" src="placeholder.jpg" data-src="insta1c.jpg">
+        </div>
+
+        <div class="bio">(BIO goes here)</div>
+        <button class="toggle-bio">Read More</button>
+      </li>
+
+      <li data-link="members/member2.html">
+        <h3>Fano<br>
+        Photographer + Videographer</h3>
+        <img class="lazy" src="placeholder.jpg" data-src="placeholder.jpg">
+
+        <div class="insta-carousel">
+          <img class="lazy" src="placeholder.jpg" data-src="insta2a.jpg">
+          <img class="lazy" src="placeholder.jpg" data-src="insta2b.jpg">
+        </div>
+
+        <div class="bio">(BIO goes here)</div>
+        <button class="toggle-bio">Read More</button>
+      </li>
+
+      <li data-link="members/member3.html">
+        <h3>Dyon<br>
+        Photographer</h3>
+        <img class="lazy" src="placeholder.jpg" data-src="placeholder.jpg">
+
+        <div class="insta-carousel">
+          <img class="lazy" src="placeholder.jpg" data-src="insta3a.jpg">
+          <img class="lazy" src="placeholder.jpg" data-src="insta3b.jpg">
+          <img class="lazy" src="placeholder.jpg" data-src="insta3c.jpg">
+        </div>
+
+        <div class="bio">(BIO goes here)</div>
+        <button class="toggle-bio">Read More</button>
+      </li>
+
+      <li data-link="members/member4.html">
+        <h3>Kenny<br>
+        Photographer</h3>
+        <img class="lazy" src="placeholder.jpg" data-src="placeholder.jpg">
+
+        <div class="insta-carousel">
+          <img class="lazy" src="placeholder.jpg" data-src="insta4a.jpg">
+          <img class="lazy" src="placeholder.jpg" data-src="insta4b.jpg">
+        </div>
+
+        <div class="bio">(BIO goes here)</div>
+        <button class="toggle-bio">Read More</button>
+      </li>
+
+      <li data-link="members/member5.html">
+        <h3>Lingar<br>
+        Photographer</h3>
+        <img class="lazy" src="placeholder.jpg" data-src="placeholder.jpg">
+
+        <div class="insta-carousel">
+          <img class="lazy" src="placeholder.jpg" data-src="insta5a.jpg">
+          <img class="lazy" src="placeholder.jpg" data-src="insta5b.jpg">
+          <img class="lazy" src="placeholder.jpg" data-src="insta5c.jpg">
+        </div>
+
+        <div class="bio">(BIO goes here)</div>
+        <button class="toggle-bio">Read More</button>
+      </li>
+
+      <li data-link="members/member6.html">
+        <h3>Dennis<br>
+        Photographer</h3>
+        <img class="lazy" src="placeholder.jpg" data-src="placeholder.jpg">
+
+        <div class="insta-carousel">
+          <img class="lazy" src="placeholder.jpg" data-src="insta6a.jpg">
+        </div>
+
+        <div class="bio">(BIO goes here)</div>
+        <button class="toggle-bio">Read More</button>
+      </li>
+
+    </ul>
+  </div>
+
+</section>
+
+<div class="lightbox" id="lightbox">
+  <img id="lightbox-img" alt="Zoomed Image">
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  /* Lazy loading */
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const img = entry.target;
+        // Check if data-src exists to avoid errors
+        if (img.dataset.src) {
+            img.src = img.dataset.src;
+            img.onload = () => img.classList.add("loaded");
+            observer.unobserve(img);
+        }
+      }
+    });
+  });
+  document.querySelectorAll(".lazy").forEach(img => observer.observe(img));
+
+  /* Hamburger */
+  const hamburger = document.getElementById("hamburger");
+  const mobileMenu = document.getElementById("mobile-menu");
+  
+  if (hamburger && mobileMenu) {
+      hamburger.addEventListener("click", () => {
+        mobileMenu.style.display =
+          mobileMenu.style.display === "flex" ? "none" : "flex";
+      });
+      
+      // Close menu when clicking a link
+      mobileMenu.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => {
+              mobileMenu.style.display = 'none';
+          });
+      });
+  }
+
+  /* Toggle bio */
+  document.querySelectorAll(".toggle-bio").forEach(btn => {
+    btn.addEventListener("click", e => {
+      e.stopPropagation();
+      const bio = btn.previousElementSibling;
+      const open = bio.style.display === "block";
+      bio.style.display = open ? "none" : "block";
+      btn.textContent = open ? "Read More" : "Read Less";
+    });
+  });
+
+  /* Card navigation */
+  document.querySelectorAll(".team li").forEach(card => {
+    card.addEventListener("click", e => {
+      // Prevent navigation if clicking interactive elements
+      if (
+        e.target.closest(".insta-carousel") ||
+        e.target.closest("button") ||
+        e.target.tagName === "IMG" ||
+        e.target.tagName === "IFRAME"
+      ) return;
+      
+      if(card.dataset.link) {
+        window.location.href = card.dataset.link;
+      }
+    });
+  });
+
+  /* Lightbox */
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightbox-img");
+
+  document.querySelectorAll(".insta-carousel img").forEach(img => {
+    img.addEventListener("click", e => {
+      e.stopPropagation();
+      lightboxImg.src = img.src;
+      lightbox.style.display = "flex";
+    });
+  });
+
+  lightbox.addEventListener("click", () => {
+    lightbox.style.display = "none";
+    lightboxImg.src = "";
+  });
+
+});
+</script>
+
+</body>
+</html>
