@@ -313,7 +313,7 @@
 
   <header>
     <h1>MPS 17 Portfolio</h1>
-    <p>Portfolio anggota MPS angkatan 17</p>
+    <p class="typing">Portfolio anggota MPS angkatan 17</p>
   </header>
 
   <div class="desktop-ui">
@@ -321,6 +321,7 @@
       <a href="about.html">About</a>
       <a href="gallery.html">Gallery</a>
       <a href="contact.html">Contact</a>
+      <button id="theme-toggle" title="Toggle theme">🌙</button>
     </nav>
   </div>
 
@@ -334,107 +335,11 @@
   </div>
 
   <div class="team">
-    <h2>TEAM MEMBERS</h2>
+    <h2>TEAM MEMBERS <span id="member-count" class="member-count"></span></h2>
+    <input type="text" id="search" placeholder="Search member..." class="search-box" oninput="filterMembers()">
 
-    <ul>
-      <li data-link="pages/member1.html">
-        <h3>Matheuw<br>
-        Photographer + Videographer</h3>
-        
-        <div class="insta-single">
-          <iframe 
-    src="https://snapwidget.com/embed/1118130"
-    class="snapwidget-widget"
-    allowtransparency="true"
-    frameborder="0"
-    scrolling="no"
-    style="border:none; overflow:hidden; width:100%;"
-    title="Posts from Instagram">
-            
-          </iframe>
-          </div>
-
-        <div class="insta-carousel">
-          <img class="lazy" src="placeholder.jpg" data-src="insta1a.jpg">
-          <img class="lazy" src="placeholder.jpg" data-src="insta1b.jpg">
-          <img class="lazy" src="placeholder.jpg" data-src="insta1c.jpg">
-        </div>
-
-        <div class="bio">(BIO goes here)</div>
-        <button class="toggle-bio">Read More</button>
-      </li>
-
-      <li data-link="pages/member2.html">
-        <h3>Fano<br>
-        Photographer + Videographer</h3>
-        <img class="lazy" src="placeholder.jpg" data-src="placeholder.jpg">
-
-        <div class="insta-carousel">
-          <img class="lazy" src="placeholder.jpg" data-src="insta2a.jpg">
-          <img class="lazy" src="placeholder.jpg" data-src="insta2b.jpg">
-        </div>
-
-        <div class="bio">(BIO goes here)</div>
-        <button class="toggle-bio">Read More</button>
-      </li>
-
-      <li data-link="pages/member3.html">
-        <h3>Dyon<br>
-        Photographer</h3>
-        <img class="lazy" src="placeholder.jpg" data-src="placeholder.jpg">
-
-        <div class="insta-carousel">
-          <img class="lazy" src="placeholder.jpg" data-src="insta3a.jpg">
-          <img class="lazy" src="placeholder.jpg" data-src="insta3b.jpg">
-          <img class="lazy" src="placeholder.jpg" data-src="insta3c.jpg">
-        </div>
-
-        <div class="bio">(BIO goes here)</div>
-        <button class="toggle-bio">Read More</button>
-      </li>
-
-      <li data-link="pages/member4.html">
-        <h3>Kenny<br>
-        Photographer</h3>
-        <img class="lazy" src="placeholder.jpg" data-src="placeholder.jpg">
-
-        <div class="insta-carousel">
-          <img class="lazy" src="placeholder.jpg" data-src="insta4a.jpg">
-          <img class="lazy" src="placeholder.jpg" data-src="insta4b.jpg">
-        </div>
-
-        <div class="bio">(BIO goes here)</div>
-        <button class="toggle-bio">Read More</button>
-      </li>
-
-      <li data-link="pages/member5.html">
-        <h3>Lingar<br>
-        Photographer</h3>
-        <img class="lazy" src="placeholder.jpg" data-src="placeholder.jpg">
-
-        <div class="insta-carousel">
-          <img class="lazy" src="placeholder.jpg" data-src="insta5a.jpg">
-          <img class="lazy" src="placeholder.jpg" data-src="insta5b.jpg">
-          <img class="lazy" src="placeholder.jpg" data-src="insta5c.jpg">
-        </div>
-
-        <div class="bio">(BIO goes here)</div>
-        <button class="toggle-bio">Read More</button>
-      </li>
-
-      <li data-link="pages/member6.html">
-        <h3>Dennis<br>
-        Photographer</h3>
-        <img class="lazy" src="placeholder.jpg" data-src="placeholder.jpg">
-
-        <div class="insta-carousel">
-          <img class="lazy" src="placeholder.jpg" data-src="insta6a.jpg">
-        </div>
-
-        <div class="bio">(BIO goes here)</div>
-        <button class="toggle-bio">Read More</button>
-      </li>
-
+    <ul id="member-list">
+      <!-- populated by JS from members.json -->
     </ul>
   </div>
 
@@ -447,86 +352,112 @@
 <script>
 document.addEventListener("DOMContentLoaded", () => {
 
-  /* Lazy loading */
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const img = entry.target;
-        // Check if data-src exists to avoid errors
-        if (img.dataset.src) {
+  /* Load members from JSON */
+  fetch("../members.json")
+    .then(r => r.json())
+    .then(members => {
+      const ul = document.getElementById("member-list");
+      ul.innerHTML = members.map(m => `
+        <li data-link="${m.page}">
+          <h3>${m.name}<br>${m.role}</h3>
+          ${m.widget ? `<div class="insta-single"><iframe src="https://snapwidget.com/embed/${m.widget}" class="snapwidget-widget" allowtransparency="true" frameborder="0" scrolling="no" style="border:none;overflow:hidden;width:100%;" title="Posts from Instagram"></iframe></div>` : `<img class="lazy" src="placeholder.jpg" data-src="placeholder.jpg">`}
+          <div class="bio">(BIO goes here)</div>
+          <button class="toggle-bio">Read More</button>
+        </li>`).join("");
+
+      document.getElementById("member-count").textContent = `(${members.length})`;
+      initCards();
+    });
+
+  function initCards() {
+    /* Lazy loading */
+    const lazyObs = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          if (img.dataset.src) {
             img.src = img.dataset.src;
             img.onload = () => img.classList.add("loaded");
-            observer.unobserve(img);
+            lazyObs.unobserve(img);
+          }
         }
-      }
+      });
     });
-  });
-  document.querySelectorAll(".lazy").forEach(img => observer.observe(img));
+    document.querySelectorAll(".lazy").forEach(img => lazyObs.observe(img));
+
+    /* Scroll animation */
+    const scrollObs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("visible"); scrollObs.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll(".team li").forEach((card, i) => {
+      card.style.transitionDelay = `${i * 0.07}s`;
+      scrollObs.observe(card);
+    });
+
+    /* Toggle bio */
+    document.querySelectorAll(".toggle-bio").forEach(btn => {
+      btn.addEventListener("click", e => {
+        e.stopPropagation();
+        const bio = btn.previousElementSibling;
+        const open = bio.style.display === "block";
+        bio.style.display = open ? "none" : "block";
+        btn.textContent = open ? "Read More" : "Read Less";
+      });
+    });
+
+    /* Card navigation */
+    document.querySelectorAll(".team li").forEach(card => {
+      card.addEventListener("click", e => {
+        if (e.target.closest("button") || e.target.tagName === "IMG" || e.target.tagName === "IFRAME") return;
+        if (card.dataset.link) window.location.href = card.dataset.link;
+      });
+    });
+
+    /* Lightbox */
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightbox-img");
+    document.querySelectorAll(".insta-carousel img").forEach(img => {
+      img.addEventListener("click", e => {
+        e.stopPropagation();
+        lightboxImg.src = img.src;
+        lightbox.style.display = "flex";
+      });
+    });
+    lightbox.addEventListener("click", () => { lightbox.style.display = "none"; lightboxImg.src = ""; });
+  }
 
   /* Hamburger */
   const hamburger = document.getElementById("hamburger");
   const mobileMenu = document.getElementById("mobile-menu");
-  
   if (hamburger && mobileMenu) {
-      hamburger.addEventListener("click", () => {
-        mobileMenu.style.display =
-          mobileMenu.style.display === "flex" ? "none" : "flex";
-      });
-      
-      // Close menu when clicking a link
-      mobileMenu.querySelectorAll('a').forEach(link => {
-          link.addEventListener('click', () => {
-              mobileMenu.style.display = 'none';
-          });
-      });
+    hamburger.addEventListener("click", () => {
+      mobileMenu.style.display = mobileMenu.style.display === "flex" ? "none" : "flex";
+    });
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => { mobileMenu.style.display = 'none'; });
+    });
   }
 
-  /* Toggle bio */
-  document.querySelectorAll(".toggle-bio").forEach(btn => {
-    btn.addEventListener("click", e => {
-      e.stopPropagation();
-      const bio = btn.previousElementSibling;
-      const open = bio.style.display === "block";
-      bio.style.display = open ? "none" : "block";
-      btn.textContent = open ? "Read More" : "Read Less";
-    });
-  });
-
-  /* Card navigation */
-  document.querySelectorAll(".team li").forEach(card => {
-    card.addEventListener("click", e => {
-      // Prevent navigation if clicking interactive elements
-      if (
-        e.target.closest(".insta-carousel") ||
-        e.target.closest("button") ||
-        e.target.tagName === "IMG" ||
-        e.target.tagName === "IFRAME"
-      ) return;
-      
-      if(card.dataset.link) {
-        window.location.href = card.dataset.link;
-      }
-    });
-  });
-
-  /* Lightbox */
-  const lightbox = document.getElementById("lightbox");
-  const lightboxImg = document.getElementById("lightbox-img");
-
-  document.querySelectorAll(".insta-carousel img").forEach(img => {
-    img.addEventListener("click", e => {
-      e.stopPropagation();
-      lightboxImg.src = img.src;
-      lightbox.style.display = "flex";
-    });
-  });
-
-  lightbox.addEventListener("click", () => {
-    lightbox.style.display = "none";
-    lightboxImg.src = "";
+  /* Theme toggle */
+  document.getElementById("theme-toggle").addEventListener("click", () => {
+    document.body.classList.toggle("light");
+    document.getElementById("theme-toggle").textContent = document.body.classList.contains("light") ? "☀️" : "🌙";
   });
 
 });
+</script>
+
+<script>
+function filterMembers() {
+  const q = document.getElementById("search").value.toLowerCase();
+  let visible = 0;
+  document.querySelectorAll(".team li").forEach(card => {
+    const match = card.querySelector("h3").textContent.toLowerCase().includes(q);
+    card.style.display = match ? "" : "none";
+    if (match) visible++;
+  });
+  document.getElementById("member-count").textContent = `(${visible})`;
+}
 </script>
 
 </body>
