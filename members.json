@@ -1,8 +1,8 @@
 [
-  { "name": "Matheuw", "role": "Photographer + Videographer", "page": "pages/member1.html", "widget": "1118130", "instagram": "#" },
-  { "name": "Fano", "role": "Photographer + Videographer", "page": "pages/member2.html", "widget": null, "instagram": "#" },
-  { "name": "Dyon", "role": "Photographer", "page": "pages/member3.html", "widget": null, "instagram": "#" },
-  { "name": "Kenny", "role": "Photographer", "page": "pages/member4.html", "widget": null, "instagram": "#" },
-  { "name": "Lingar", "role": "Photographer", "page": "pages/member5.html", "widget": null, "instagram": "#" },
-  { "name": "Dennis", "role": "Photographer", "page": "pages/member6.html", "widget": null, "instagram": "#" }
+  { "name": "Matheuw", "role": "Photographer + Videographer", "page": "pages/member1.html", "widget": "1118130", "instagram": "#", "gen": 17 },
+  { "name": "Fano", "role": "Photographer + Videographer", "page": "pages/member2.html", "widget": null, "instagram": "#", "gen": 17 },
+  { "name": "Dyon", "role": "Photographer", "page": "pages/member3.html", "widget": null, "instagram": "#", "gen": 17 },
+  { "name": "Kenny", "role": "Photographer", "page": "pages/member4.html", "widget": null, "instagram": "#", "gen": 17 },
+  { "name": "Lingar", "role": "Photographer", "page": "pages/member5.html", "widget": null, "instagram": "#", "gen": 17 },
+  { "name": "Dennis", "role": "Photographer", "page": "pages/member6.html", "widget": null, "instagram": "#", "gen": 17 }
 ]
