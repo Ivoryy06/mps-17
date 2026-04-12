@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact – MPS 17</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/pagehome.css">
+  <style>
+    body {
+      min-height: 100vh;
+      background: url("pictures/background.jpg") center/cover no-repeat fixed;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      z-index: 0;
+    }
+
+    .page-wrap {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 500px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 2rem;
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(4px);
+      font-size: 0.9rem;
+      color: #fff;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .back-link:hover { background: rgba(0,0,0,0.6); }
+
+    h1 { font-size: 2rem; margin-bottom: 0.4rem; }
+    .subtitle { color: rgba(255,255,255,0.65); margin-bottom: 2.5rem; font-size: 0.95rem; }
+
+    .contact-card {
+      background: rgba(0,0,0,0.45);
+      backdrop-filter: blur(12px);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      text-align: left;
+      transition: background 0.2s;
+    }
+
+    .contact-card:hover { background: rgba(0,0,0,0.6); }
+
+    .contact-avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      display: grid;
+      place-items: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .contact-info { flex: 1; }
+    .contact-info .role { font-size: 0.75rem; color: rgba(255,255,255,0.55); text-transform: uppercase; letter-spacing: 0.05em; }
+    .contact-info .name { font-size: 1.05rem; font-weight: 600; margin: 0.15rem 0; }
+
+    .contact-links { display: flex; gap: 0.5rem; margin-top: 0.4rem; }
+    .contact-links a {
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.1);
+      font-size: 0.8rem;
+      color: #fff;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .contact-links a:hover { background: rgba(255,255,255,0.25); }
+
+    .divider {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.35);
+      margin: 1.5rem 0 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    @media (max-width: 480px) {
+      h1 { font-size: 1.5rem; }
+      .contact-card { padding: 1rem; gap: 0.9rem; }
+      .contact-avatar { width: 46px; height: 46px; font-size: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrap">
+    <a href="index.html" class="back-link">← Home</a>
+
+    <h1>Contact</h1>
+    <p class="subtitle">Reach out to MPS 17 leadership</p>
+
+    <div class="divider">Leadership</div>
+
+    <div class="contact-card">
+      <div class="contact-avatar">👑</div>
+      <div class="contact-info">
+        <div class="role">President</div>
+        <div class="name">Name Placeholder</div>
+        <div class="contact-links">
+          <a href="#" target="_blank">Instagram</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-card">
+      <div class="contact-avatar">🤝</div>
+      <div class="contact-info">
+        <div class="role">Vice President</div>
+        <div class="name">Name Placeholder</div>
+        <div class="contact-links">
+          <a href="#" target="_blank">Instagram</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider">General</div>
+
+    <div class="contact-card">
+      <div class="contact-avatar">📸</div>
+      <div class="contact-info">
+        <div class="role">MPS 17 Official</div>
+        <div class="name">@mps17_official</div>
+        <div class="contact-links">
+          <a href="#" target="_blank">Instagram</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
