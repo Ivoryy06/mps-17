@@ -11,10 +11,6 @@
       background: url("pictures/background.jpg") center/cover no-repeat fixed;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
       color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
     }
     body::before {
       content: "";
@@ -26,10 +22,9 @@
     .page-wrap {
       position: relative;
       z-index: 1;
-      max-width: 500px;
-      width: 100%;
-      padding: 2rem 1.5rem;
-      text-align: center;
+      max-width: 560px;
+      margin: 0 auto;
+      padding: 5rem 1.5rem 3rem;
     }
     .back-link {
       display: inline-block;
@@ -44,30 +39,41 @@
       transition: background 0.2s;
     }
     .back-link:hover { background: rgba(0,0,0,0.6); }
-    h1 { font-size: 2rem; margin-bottom: 0.4rem; }
-    .subtitle { color: rgba(255,255,255,0.55); font-size: 0.95rem; margin-bottom: 2.5rem; }
-    .credit-card {
+    .page-header { text-align: center; margin-bottom: 3rem; }
+    .page-header h1 { font-size: 2.2rem; margin-bottom: 0.3rem; }
+    .page-header p { color: rgba(255,255,255,0.5); font-size: 0.95rem; }
+
+    .section-title {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.35);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin: 2rem 0 0.75rem;
+    }
+
+    .credit-list {
       background: rgba(0,0,0,0.4);
       backdrop-filter: blur(12px);
       border-radius: 16px;
-      padding: 1.4rem 1.5rem;
-      margin-bottom: 1rem;
-      text-align: left;
+      overflow: hidden;
+    }
+
+    .credit-row {
       display: flex;
+      justify-content: space-between;
       align-items: center;
+      padding: 0.85rem 1.2rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
       gap: 1rem;
     }
-    .credit-icon {
-      font-size: 1.6rem;
-      flex-shrink: 0;
+    .credit-row:last-child { border-bottom: none; }
+
+    .credit-role { font-size: 0.82rem; color: rgba(255,255,255,0.45); }
+    .credit-name {
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-align: right;
     }
-    .credit-role {
-      font-size: 0.72rem;
-      color: rgba(255,255,255,0.45);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
-    .credit-name { font-size: 1rem; font-weight: 600; margin: 0.1rem 0 0.3rem; }
     .credit-name a {
       color: #fff;
       text-decoration: none;
@@ -75,63 +81,74 @@
       transition: border-color 0.2s;
     }
     .credit-name a:hover { border-color: rgba(255,255,255,0.7); }
-    .divider {
-      font-size: 0.75rem;
+
+    footer {
+      text-align: center;
+      padding: 2rem;
       color: rgba(255,255,255,0.3);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin: 1.5rem 0 0.8rem;
+      font-size: 0.8rem;
     }
+    footer a { color: rgba(255,255,255,0.45); text-decoration: none; }
+
     @media (max-width: 480px) {
-      h1 { font-size: 1.5rem; }
-      .page-wrap { padding: 2rem 1rem; }
+      .page-header h1 { font-size: 1.5rem; }
+      .page-wrap { padding: 4rem 1rem 2rem; }
     }
   </style>
 </head>
 <body>
   <div class="page-wrap">
     <a href="index.html" class="back-link">← Home</a>
-    <h1>Credits</h1>
-    <p class="subtitle">People behind this site</p>
 
-    <div class="divider">Website</div>
-
-    <div class="credit-card">
-      <div class="credit-icon">💻</div>
-      <div>
-        <div class="credit-role">Developer & Designer</div>
-        <div class="credit-name"><a href="https://github.com/Ivoryy06" target="_blank">Ivory</a></div>
-      </div>
+    <div class="page-header">
+      <h1>Credits</h1>
+      <p>Everyone who made this possible</p>
     </div>
 
-    <div class="divider">Photography</div>
-
-    <div class="credit-card">
-      <div class="credit-icon">📸</div>
-      <div>
-        <div class="credit-role">Background Photo</div>
-        <div class="credit-name">MPS 17 Members</div>
-      </div>
+    <div class="section-title">Website</div>
+    <div class="credit-list">
+      <div class="credit-row"><span class="credit-role">Developer</span><span class="credit-name"><a href="https://github.com/Ivoryy06" target="_blank">Ivory</a></span></div>
+      <div class="credit-row"><span class="credit-role">UI / UX Designer</span><span class="credit-name"><a href="https://github.com/Ivoryy06" target="_blank">Ivory</a></span></div>
+      <div class="credit-row"><span class="credit-role">Frontend Architecture</span><span class="credit-name"><a href="https://github.com/Ivoryy06" target="_blank">Ivory</a></span></div>
+      <div class="credit-row"><span class="credit-role">Performance Optimization</span><span class="credit-name"><a href="https://github.com/Ivoryy06" target="_blank">Ivory</a></span></div>
+      <div class="credit-row"><span class="credit-role">Mobile Responsive Design</span><span class="credit-name"><a href="https://github.com/Ivoryy06" target="_blank">Ivory</a></span></div>
     </div>
 
-    <div class="divider">Tools & Libraries</div>
-
-    <div class="credit-card">
-      <div class="credit-icon">🔧</div>
-      <div>
-        <div class="credit-role">Instagram Widget</div>
-        <div class="credit-name"><a href="https://snapwidget.com" target="_blank">SnapWidget</a></div>
-      </div>
+    <div class="section-title">Content</div>
+    <div class="credit-list">
+      <div class="credit-row"><span class="credit-role">Photography</span><span class="credit-name">MPS 17 Members</span></div>
+      <div class="credit-row"><span class="credit-role">Background Photo</span><span class="credit-name">MPS 17 Members</span></div>
+      <div class="credit-row"><span class="credit-role">Member Bios</span><span class="credit-name">MPS 17 Members</span></div>
     </div>
 
-    <div class="credit-card">
-      <div class="credit-icon">🌐</div>
-      <div>
-        <div class="credit-role">Hosting</div>
-        <div class="credit-name"><a href="https://pages.github.com" target="_blank">GitHub Pages</a></div>
-      </div>
+    <div class="section-title">Leadership & Organization</div>
+    <div class="credit-list">
+      <div class="credit-row"><span class="credit-role">Advisor</span><span class="credit-name">Name Placeholder</span></div>
+      <div class="credit-row"><span class="credit-role">President</span><span class="credit-name">Name Placeholder</span></div>
+      <div class="credit-row"><span class="credit-role">Vice President</span><span class="credit-name">Name Placeholder</span></div>
+      <div class="credit-row"><span class="credit-role">Secretary</span><span class="credit-name">Name Placeholder</span></div>
+      <div class="credit-row"><span class="credit-role">Treasurer</span><span class="credit-name">Name Placeholder</span></div>
+    </div>
+
+    <div class="section-title">Special Thanks</div>
+    <div class="credit-list">
+      <div class="credit-row"><span class="credit-role">Support</span><span class="credit-name">All MPS 17 Members</span></div>
+      <div class="credit-row"><span class="credit-role">Guidance & Support</span><span class="credit-name">Advisor</span></div>
+      <div class="credit-row"><span class="credit-role">Visitors</span><span class="credit-name">Everyone who stopped by 🙏</span></div>
+    </div>
+
+    <div class="section-title">Built With</div>
+    <div class="credit-list">
+      <div class="credit-row"><span class="credit-role">Languages</span><span class="credit-name">HTML5 · CSS3 · Vanilla JS</span></div>
+      <div class="credit-row"><span class="credit-role">Hosting</span><span class="credit-name"><a href="https://pages.github.com" target="_blank">GitHub Pages</a></span></div>
+      <div class="credit-row"><span class="credit-role">Image Optimization</span><span class="credit-name">ImageMagick</span></div>
+      <div class="credit-row"><span class="credit-role">No frameworks. Built from scratch.</span><span class="credit-name">💪</span></div>
     </div>
 
   </div>
+
+  <footer>
+    © 2026 Marsudirini Photography Students · Made by <a href="https://github.com/Ivoryy06" target="_blank">Ivory</a>
+  </footer>
 </body>
 </html>
