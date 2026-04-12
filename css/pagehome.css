@@ -201,21 +201,44 @@ body {
 .desktop-ui { display: block; }
 .mobile-ui { display: none; }
 
-/* ===== RESPONSIVE ===== */
+/* ===== RESPONSIVE: TABLET ===== */
 @media (max-width: 768px) {
   .team ul {
     grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
   }
+
+  .hero h1 { font-size: 2rem; }
 }
 
+/* ===== RESPONSIVE: MOBILE ===== */
 @media (max-width: 480px) {
   .desktop-ui { display: none; }
   .mobile-ui { display: block; }
 
-  .hero { padding-top: 4rem; }
-  .hero h1 { font-size: 1.8rem; }
+  .hero {
+    padding: 4rem 1rem 2rem;
+  }
 
-  .team ul { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 1.5rem; }
+  .hero p { font-size: 1rem; }
+
+  .team h2 { font-size: 1.4rem; }
+
+  .team ul {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 0 0.5rem;
+  }
+
+  .team li {
+    padding: 1rem;
+  }
+
+  .search-box {
+    font-size: 0.95rem;
+    padding: 0.5rem 0.9rem;
+  }
 
   .hamburger {
     font-size: 2rem;
