@@ -67,11 +67,22 @@
     .hero h1 {
       font-size: 2.5rem;
       margin-bottom: 0.5rem;
+      animation: fadeSlideDown 0.8s ease both;
     }
 
     .hero p {
       font-size: 1.2rem;
       color: rgba(255,255,255,0.85);
+      animation: fadeSlideDown 0.8s ease 0.2s both;
+    }
+
+    .gen-filter {
+      animation: fadeSlideDown 0.8s ease 0.4s both;
+    }
+
+    @keyframes fadeSlideDown {
+      from { opacity: 0; transform: translateY(-16px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
     /* ==============================
