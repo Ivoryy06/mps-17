@@ -186,7 +186,10 @@ main.member {
 }
 
 /* ===== PAGE LOAD ANIMATION ===== */
-body { animation: pageFadeIn 0.35s ease both; }
+body {
+  animation: pageFadeIn 0.35s ease both;
+  color-scheme: only light;
+}
 @keyframes pageFadeIn {
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
