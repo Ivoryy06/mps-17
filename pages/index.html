@@ -105,36 +105,24 @@
       opacity: 0.8;
     }
 
-    /* Hamburger Icon */
-    .hamburger {
-      font-size: 2rem;
-      color: white;
-      position: absolute;
-      top: 1rem;
-      right: 1.5rem;
-      cursor: pointer;
-      z-index: 10;
-    }
-
-    /* Mobile Menu Overlay */
-    .mobile-menu {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.95);
-      flex-direction: column;
+    /* Mobile Nav Links */
+    .mobile-nav {
+      display: flex;
+      flex-wrap: wrap;
       justify-content: center;
-      align-items: center;
-      gap: 1.5rem;
-      z-index: 9999;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
     }
 
-    .mobile-menu a {
-      font-size: 2rem;
+    .mobile-nav a {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.95rem;
+      font-weight: 500;
       color: white;
+      text-decoration: none;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.35);
+      backdrop-filter: blur(4px);
     }
 
     /* UI Toggles */
@@ -329,7 +317,11 @@
   </div>
 
   <div class="mobile-ui">
-    <div class="hamburger" id="hamburger">&#9776;</div>
+    <nav class="mobile-nav">
+      <a href="about.html">About</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="contact.html">Contact</a>
+    </nav>
   </div>
 
   <div class="team">
@@ -458,10 +450,5 @@ function filterMembers() {
 }
 </script>
 
-<div class="mobile-menu" id="mobile-menu">
-  <a href="about.html">About</a>
-  <a href="gallery.html">Gallery</a>
-  <a href="contact.html">Contact</a>
-</div>
 </body>
 </html>
