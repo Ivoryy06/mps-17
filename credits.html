@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Credits – Marsudirini Photography Students</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/pagehome.css">
+  <style>
+    body {
+      min-height: 100vh;
+      background: url("pictures/background.jpg") center/cover no-repeat fixed;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 0;
+    }
+    .page-wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 500px;
+      width: 100%;
+      padding: 2rem 1.5rem;
+      text-align: center;
+    }
+    .back-link {
+      display: inline-block;
+      margin-bottom: 2rem;
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(4px);
+      font-size: 0.9rem;
+      color: #fff;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .back-link:hover { background: rgba(0,0,0,0.6); }
+    h1 { font-size: 2rem; margin-bottom: 0.4rem; }
+    .subtitle { color: rgba(255,255,255,0.55); font-size: 0.95rem; margin-bottom: 2.5rem; }
+    .credit-card {
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(12px);
+      border-radius: 16px;
+      padding: 1.4rem 1.5rem;
+      margin-bottom: 1rem;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .credit-icon {
+      font-size: 1.6rem;
+      flex-shrink: 0;
+    }
+    .credit-role {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.45);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .credit-name { font-size: 1rem; font-weight: 600; margin: 0.1rem 0 0.3rem; }
+    .credit-name a {
+      color: #fff;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255,255,255,0.25);
+      transition: border-color 0.2s;
+    }
+    .credit-name a:hover { border-color: rgba(255,255,255,0.7); }
+    .divider {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.3);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin: 1.5rem 0 0.8rem;
+    }
+    @media (max-width: 480px) {
+      h1 { font-size: 1.5rem; }
+      .page-wrap { padding: 2rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrap">
+    <a href="index.html" class="back-link">← Home</a>
+    <h1>Credits</h1>
+    <p class="subtitle">People behind this site</p>
+
+    <div class="divider">Website</div>
+
+    <div class="credit-card">
+      <div class="credit-icon">💻</div>
+      <div>
+        <div class="credit-role">Developer & Designer</div>
+        <div class="credit-name"><a href="https://github.com/Ivoryy06" target="_blank">Ivory</a></div>
+      </div>
+    </div>
+
+    <div class="divider">Photography</div>
+
+    <div class="credit-card">
+      <div class="credit-icon">📸</div>
+      <div>
+        <div class="credit-role">Background Photo</div>
+        <div class="credit-name">MPS 17 Members</div>
+      </div>
+    </div>
+
+    <div class="divider">Tools & Libraries</div>
+
+    <div class="credit-card">
+      <div class="credit-icon">🔧</div>
+      <div>
+        <div class="credit-role">Instagram Widget</div>
+        <div class="credit-name"><a href="https://snapwidget.com" target="_blank">SnapWidget</a></div>
+      </div>
+    </div>
+
+    <div class="credit-card">
+      <div class="credit-icon">🌐</div>
+      <div>
+        <div class="credit-role">Hosting</div>
+        <div class="credit-name"><a href="https://pages.github.com" target="_blank">GitHub Pages</a></div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
