@@ -235,6 +235,20 @@
     /* ==============================
        6. UTILITIES (Bio, Lazy, Lightbox)
        ============================== */
+    .skeleton-card {
+      background: rgba(255,255,255,0.05) !important;
+      pointer-events: none;
+    }
+    .skel {
+      background: linear-gradient(90deg, rgba(255,255,255,0.07) 25%, rgba(255,255,255,0.13) 50%, rgba(255,255,255,0.07) 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.4s infinite;
+      border-radius: 6px;
+    }
+    .skel-title { height: 1.2rem; width: 60%; margin: 0 auto 0.8rem; }
+    .skel-img   { height: 160px; width: 100%; }
+    @keyframes shimmer { to { background-position: -200% 0; } }
+
     .bio {
       display: none;
       margin-top: 0.75rem;
@@ -333,7 +347,7 @@
 
   <header>
     <h1>Marsudirini Photography Students</h1>
-    <p class="typing">Portfolio anggota MPS angkatan 17</p>
+    <p>Portfolio anggota MPS angkatan 17</p>
   </header>
 
   <div class="desktop-ui">
@@ -372,11 +386,14 @@
 <script>
 document.addEventListener("DOMContentLoaded", () => {
 
+  /* Skeleton placeholders */
+  const ul = document.getElementById("member-list");
+  ul.innerHTML = Array(6).fill(`<li class="skeleton-card"><div class="skel skel-title"></div><div class="skel skel-img"></div></li>`).join("");
+
   /* Load members from JSON */
   fetch("members.json")
     .then(r => r.json())
     .then(members => {
-      const ul = document.getElementById("member-list");
       ul.innerHTML = members.map(m => `
         <li data-link="${m.page}">
           <h3>${m.name}<br>${m.role}</h3>
@@ -471,6 +488,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 </script>
+
+<footer style="text-align:center;padding:2rem;color:rgba(255,255,255,0.35);font-size:0.8rem;position:relative;z-index:2;">
+  © 2026 Marsudirini Photography Students · Made by <a href="https://github.com/Ivoryy06" target="_blank" style="color:rgba(255,255,255,0.5);text-decoration:none;">Ivory</a>
+</footer>
 
 <script>
 function filterMembers() {

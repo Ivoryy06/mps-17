@@ -349,22 +349,3 @@ body.light .search-box::placeholder { color: rgba(0,0,0,0.4); }
   opacity: 1;
 }
 
-/* ===== TYPING ANIMATION ===== */
-.typing {
-  overflow: hidden;
-  white-space: nowrap;
-  border-right: 2px solid rgba(255,255,255,0.75);
-  width: 0;
-  animation: typing 2.5s steps(40, end) forwards, blink 0.75s step-end infinite;
-  font-size: 1.2rem;
-  color: rgba(255,255,255,0.85);
-  margin: 0 auto;
-}
-
-@keyframes typing {
-  to { width: 100%; }
-}
-
-@keyframes blink {
-  50% { border-color: transparent; }
-}

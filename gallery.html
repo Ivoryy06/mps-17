@@ -153,6 +153,12 @@
     <img id="lightbox-img" alt="">
   </div>
 
+  <button onclick="window.scrollTo({top:0,behavior:'smooth'})" style="position:fixed;bottom:1.5rem;right:1.5rem;z-index:100;background:rgba(0,0,0,0.5);color:#fff;border:none;border-radius:999px;padding:0.5rem 0.9rem;cursor:pointer;backdrop-filter:blur(6px);font-size:0.9rem;">↑ Top</button>
+
+  <footer style="text-align:center;padding:2rem;color:rgba(255,255,255,0.35);font-size:0.8rem;position:relative;z-index:1;">
+    © 2026 Marsudirini Photography Students · Made by <a href="https://github.com/Ivoryy06" target="_blank" style="color:rgba(255,255,255,0.5);text-decoration:none;">Ivory</a>
+  </footer>
+
   <script>
     fetch("members.json")
       .then(r => r.json())
