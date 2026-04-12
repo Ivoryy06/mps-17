@@ -5,6 +5,19 @@
   <meta charset="UTF-8">
   <title>Marsudirini Photography Students</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio website of Marsudirini Photography Students – Generation 17">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Marsudirini Photography Students">
+  <meta property="og:description" content="Portfolio of MPS Generation 17 photographers and videographers.">
+  <meta property="og:image" content="https://ivoryy06.github.io/mps17/pictures/background.jpg">
+  <meta property="og:url" content="https://ivoryy06.github.io/mps17">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#111111">
 
   <link rel="stylesheet" href="css/pagehome.css?v=7">
 
@@ -559,6 +572,32 @@ document.querySelectorAll(".gen-btn").forEach(btn => {
   });
 });
 </script>
+
+<script>
+  /* Active nav highlight */
+  const path = location.pathname.split("/").pop() || "index.html";
+  document.querySelectorAll(".hero-links a, .mobile-menu a").forEach(a => {
+    if (a.getAttribute("href") === path) a.style.background = "rgba(255,255,255,0.3)";
+  });
+
+  /* Page transition fade-out */
+  document.querySelectorAll("a[href]").forEach(a => {
+    const href = a.getAttribute("href");
+    if (!href.startsWith("http") && !href.startsWith("#") && !href.startsWith("mailto")) {
+      a.addEventListener("click", e => {
+        e.preventDefault();
+        document.body.style.animation = "pageFadeOut 0.25s ease forwards";
+        setTimeout(() => location.href = href, 250);
+      });
+    }
+  });
+</script>
+
+<style>
+  @keyframes pageFadeOut {
+    to { opacity: 0; transform: translateY(-8px); }
+  }
+</style>
 
 </body>
 </html>

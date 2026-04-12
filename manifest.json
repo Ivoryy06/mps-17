@@ -1,0 +1,16 @@
+{
+  "name": "Marsudirini Photography Students",
+  "short_name": "MPS 17",
+  "description": "Portfolio of MPS Generation 17",
+  "start_url": "/mps17/",
+  "display": "standalone",
+  "background_color": "#111111",
+  "theme_color": "#111111",
+  "icons": [
+    {
+      "src": "pictures/background.jpg",
+      "sizes": "any",
+      "type": "image/jpeg"
+    }
+  ]
+}

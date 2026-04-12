@@ -146,6 +146,8 @@
       <button class="active" data-filter="all">All</button>
     </div>
 
+    <input type="text" id="gallery-search" placeholder="Search member..." oninput="searchGallery()" style="display:block;margin:0 auto 1.5rem;padding:0.5rem 1rem;border-radius:999px;border:none;background:rgba(255,255,255,0.12);color:#fff;font-size:0.95rem;width:100%;max-width:320px;backdrop-filter:blur(4px);outline:none;">
+
     <div class="masonry" id="masonry"></div>
   </div>
 
@@ -202,6 +204,13 @@
           setFilter("all", this);
         });
       });
+
+    function searchGallery() {
+      const q = document.getElementById("gallery-search").value.toLowerCase();
+      document.querySelectorAll(".masonry-item").forEach(item => {
+        item.style.display = item.dataset.member.toLowerCase().includes(q) ? "" : "none";
+      });
+    }
 
     // Lightbox for any images
     const lightbox = document.getElementById("lightbox");

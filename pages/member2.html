@@ -42,6 +42,7 @@
           style="border:none; overflow:hidden; width:100%; min-height:100vh;"></iframe>
 </div>
 
+    <div class="member-pagination"><a href="member1.html">← Member 1</a><span class="spacer"></span><a href="member3.html">Member 3 →</a></div>
   </main>
 
   <!-- Lightbox -->
@@ -121,5 +122,18 @@
     });
   </script>
 
+<script>
+  document.querySelectorAll("a[href]").forEach(a => {
+    const href = a.getAttribute("href");
+    if (!href.startsWith("http") && !href.startsWith("#")) {
+      a.addEventListener("click", e => {
+        e.preventDefault();
+        document.body.style.cssText += ";animation:pageFadeOut 0.25s ease forwards";
+        setTimeout(() => location.href = href, 250);
+      });
+    }
+  });
+</script>
+<style>@keyframes pageFadeOut{to{opacity:0;transform:translateY(-8px)}}</style>
 </body>
 </html>

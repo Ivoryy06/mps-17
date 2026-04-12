@@ -26,6 +26,7 @@
       <img src="../pictures/porto/member5/porto5.jpg" alt="Porto 5">
       <img src="../pictures/porto/member5/porto6.jpg" alt="Porto 6">
     </div>
+    <div class="member-pagination"><a href="member4.html">← Member 4</a><span class="spacer"></span><a href="member6.html">Member 6 →</a></div>
   </main>
 
   <div class="lightbox" id="lightbox"><img id="lightbox-img" alt=""></div>
@@ -65,5 +66,18 @@
       contactPopup.addEventListener("click", e => { if(e.target===contactPopup) contactPopup.style.display="none"; });
     });
   </script>
+<script>
+  document.querySelectorAll("a[href]").forEach(a => {
+    const href = a.getAttribute("href");
+    if (!href.startsWith("http") && !href.startsWith("#")) {
+      a.addEventListener("click", e => {
+        e.preventDefault();
+        document.body.style.cssText += ";animation:pageFadeOut 0.25s ease forwards";
+        setTimeout(() => location.href = href, 250);
+      });
+    }
+  });
+</script>
+<style>@keyframes pageFadeOut{to{opacity:0;transform:translateY(-8px)}}</style>
 </body>
 </html>

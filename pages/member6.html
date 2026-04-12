@@ -42,6 +42,7 @@
       <img src="gallery/m1-6.jpg" alt="Gallery 6">
     </div>
 
+    <div class="member-pagination"><a href="member5.html">← Member 5</a><span class="spacer"></span></div>
   </main>
 
   <!-- Lightbox -->
@@ -121,5 +122,18 @@
     });
   </script>
 
+<script>
+  document.querySelectorAll("a[href]").forEach(a => {
+    const href = a.getAttribute("href");
+    if (!href.startsWith("http") && !href.startsWith("#")) {
+      a.addEventListener("click", e => {
+        e.preventDefault();
+        document.body.style.cssText += ";animation:pageFadeOut 0.25s ease forwards";
+        setTimeout(() => location.href = href, 250);
+      });
+    }
+  });
+</script>
+<style>@keyframes pageFadeOut{to{opacity:0;transform:translateY(-8px)}}</style>
 </body>
 </html>
