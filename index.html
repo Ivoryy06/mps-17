@@ -142,7 +142,7 @@
 
     /* Mobile Menu Overlay */
     .mobile-menu {
-      display: none; /* Hidden by default */
+      display: none;
       position: fixed;
       inset: 0;
       background: rgba(0,0,0,0.95);
@@ -413,12 +413,6 @@
 
   <div class="mobile-ui">
     <div class="hamburger" id="hamburger">&#9776;</div>
-    <div class="mobile-menu" id="mobile-menu">
-      <a href="credits.html">Credits</a>
-      <a href="about.html">About</a>
-      <a href="gallery.html">Gallery</a>
-      <a href="contact.html">Contact</a>
-    </div>
   </div>
 
   <div class="team">
@@ -599,5 +593,11 @@ document.querySelectorAll(".gen-btn").forEach(btn => {
   }
 </style>
 
+<div class="mobile-menu" id="mobile-menu">
+  <a href="credits.html">Credits</a>
+  <a href="about.html">About</a>
+  <a href="gallery.html">Gallery</a>
+  <a href="contact.html">Contact</a>
+</div>
 </body>
 </html>
