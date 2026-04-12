@@ -27,7 +27,7 @@ html::before {
   /* image SAME FOLDER as CSS */
   background:
     linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
-    url("m1background.jpg") center / cover no-repeat;
+    url("m3background.jpg") center / cover no-repeat;
 
   z-index: -3;
 }

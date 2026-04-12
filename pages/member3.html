@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Full Name Dyon</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/member3.css">
+  <style>
+    main.member { max-width:1100px; margin:3rem auto; padding:0 1.5rem; display:flex; flex-direction:column; gap:2rem; }
+    .member-title { font-size:2rem; font-weight:700; text-align:center; margin-bottom:1rem; }
+    .bio-text { max-width:600px; margin:1rem auto 3rem; font-size:1rem; line-height:1.6; color:#ddd; text-align:center; display:none; }
+    .member-nav { display:flex; gap:1rem; justify-content:center; margin-bottom:3rem; }
+    .member-nav button, .member-nav a { font-size:0.95rem; color:#fff; background:rgba(0,0,0,0.35); padding:0.4rem 0.8rem; border-radius:999px; border:none; cursor:pointer; text-decoration:none; backdrop-filter:blur(4px); transition:background 0.2s ease; }
+    .member-nav button:hover, .member-nav a:hover { background:rgba(0,0,0,0.55); }
+    .lightbox, .popup { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.9); justify-content:center; align-items:center; z-index:999; color:#fff; text-align:center; padding:2rem; }
+    .lightbox img { max-width:90%; max-height:90%; border-radius:8px; }
+    .popup-content { background:rgba(0,0,0,0.85); padding:2rem; border-radius:12px; max-width:400px; width:90%; }
+    .popup-close { margin-top:1rem; padding:0.4rem 0.8rem; border:none; border-radius:999px; background:rgba(255,255,255,0.2); color:#fff; cursor:pointer; transition:background 0.2s ease; }
+    .popup-close:hover { background:rgba(255,255,255,0.35); }
+    .contact-socials a img { width:32px; height:32px; filter:invert(1); transition:transform 0.2s ease; }
+    .contact-socials a:hover img { transform:scale(1.1); }
+    @media (max-width:1024px) { .gallery { column-count:3; } }
+    @media (max-width:768px)  { .gallery { column-count:2; } }
+    @media (max-width:480px)  { .gallery { column-count:1; } }
+  </style>
+</head>
+<body>
+  <div class="hero-bg"></div>
+  <main class="member">
+    <h1 class="member-title">Full Name Dyon</h1>
+    <nav class="member-nav">
+      <a href="../index.html">← Home</a>
+      <button id="bio-toggle">Show Bio</button>
+      <button id="contact-toggle">Contact</button>
+    </nav>
+    <p class="bio-text" id="bio-text">
+      This is the member bio. Short description about who they are,
+      what they do, or anything you want here.
+    </p>
+    <div class="gallery">
+      <img src="../pictures/porto/member3/porto1.jpg" alt="Porto 1">
+      <img src="../pictures/porto/member3/porto2.jpg" alt="Porto 2">
+      <img src="../pictures/porto/member3/porto3.jpg" alt="Porto 3">
+      <img src="../pictures/porto/member3/porto4.jpg" alt="Porto 4">
+      <img src="../pictures/porto/member3/porto5.jpg" alt="Porto 5">
+      <img src="../pictures/porto/member3/porto6.jpg" alt="Porto 6">
+    </div>
+  </main>
+
+  <div class="lightbox" id="lightbox"><img id="lightbox-img" alt=""></div>
+
+  <div class="popup" id="contact-popup">
+    <div class="popup-content">
+      <h2>Contact</h2>
+      <div class="contact-socials">
+        <a href="https://www.instagram.com/" target="_blank" aria-label="Instagram">
+          <img src="../instagram.svg" alt="Instagram">
+        </a>
+      </div>
+      <button class="popup-close">Close</button>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const lightbox = document.getElementById("lightbox");
+      const lightboxImg = document.getElementById("lightbox-img");
+      document.querySelectorAll(".gallery img").forEach(img => {
+        img.addEventListener("click", () => { lightbox.style.display="flex"; lightboxImg.src=img.src; lightboxImg.alt=img.alt; });
+      });
+      lightbox.addEventListener("click", () => { lightbox.style.display="none"; lightboxImg.src=""; });
+
+      const bioBtn = document.getElementById("bio-toggle");
+      const bioText = document.getElementById("bio-text");
+      bioBtn.addEventListener("click", () => {
+        const v = bioText.style.display === "block";
+        bioText.style.display = v ? "none" : "block";
+        bioBtn.textContent = v ? "Show Bio" : "Hide Bio";
+      });
+
+      const contactPopup = document.getElementById("contact-popup");
+      document.getElementById("contact-toggle").addEventListener("click", () => { contactPopup.style.display="flex"; });
+      contactPopup.querySelector(".popup-close").addEventListener("click", () => { contactPopup.style.display="none"; });
+      contactPopup.addEventListener("click", e => { if(e.target===contactPopup) contactPopup.style.display="none"; });
+    });
+  </script>
+</body>
+</html>
