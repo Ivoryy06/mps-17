@@ -1,4 +1,3 @@
-<script>
 document.addEventListener("DOMContentLoaded", () => {
 
   /* ===== LAZY LOADING ===== */
@@ -35,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.querySelectorAll(".insta-carousel img").forEach(img => {
     img.addEventListener("click", e => {
-      e.stopPropagation(); // 🚫 stop card navigation
+      e.stopPropagation();
 
       const carousel = img.closest(".insta-carousel");
       currentCarousel = Array.from(carousel.querySelectorAll("img"));
@@ -57,12 +56,12 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   modalClose?.addEventListener("click", () => modal.style.display = "none");
-  modal.addEventListener("click", e => {
+  modal?.addEventListener("click", e => {
     if (e.target === modal) modal.style.display = "none";
   });
 
   document.addEventListener("keydown", e => {
-    if (modal.style.display === "flex") {
+    if (modal?.style.display === "flex") {
       if (e.key === "ArrowRight") {
         currentIndex = (currentIndex + 1) % currentCarousel.length;
         updateModal();
@@ -78,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
   /* ===== BIO TOGGLE ===== */
   document.querySelectorAll(".toggle-bio").forEach(btn => {
     btn.addEventListener("click", e => {
-      e.stopPropagation(); // 🚫 stop card navigation
+      e.stopPropagation();
 
       const bio = btn.previousElementSibling;
       const open = bio.style.display === "block";
@@ -91,8 +90,6 @@ document.addEventListener("DOMContentLoaded", () => {
   /* ===== MEMBER CARD NAVIGATION ===== */
   document.querySelectorAll(".team li").forEach(card => {
     card.addEventListener("click", e => {
-
-      // Ignore IG images & Read More
       if (
         e.target.closest(".insta-carousel") ||
         e.target.closest(".toggle-bio")
@@ -108,8 +105,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const mobileMenu = document.getElementById("mobile-menu");
 
   hamburger?.addEventListener("click", () => {
-    mobileMenu.style.display =
-      mobileMenu.style.display === "flex" ? "none" : "flex";
+    const isOpen = mobileMenu.style.display === "flex";
+    mobileMenu.style.display = isOpen ? "none" : "flex";
+    document.body.classList.toggle("menu-open", !isOpen);
   });
 
   /* ===== 3D TILT EFFECT ===== */
@@ -134,14 +132,3 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
-/* ===== MOBILE MENU STATE ===== */
-const hamburger = document.getElementById("hamburger");
-const mobileMenu = document.getElementById("mobile-menu");
-
-hamburger.addEventListener("click", () => {
-  const isOpen = mobileMenu.style.display === "flex";
-
-  mobileMenu.style.display = isOpen ? "none" : "flex";
-  document.body.classList.toggle("menu-open", !isOpen);
-});
-</script>
