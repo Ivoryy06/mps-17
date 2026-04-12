@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>About – MPS 17</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/pagehome.css">
+  <style>
+    body {
+      min-height: 100vh;
+      background: url("pictures/background.jpg") center/cover no-repeat fixed;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #fff;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      z-index: 0;
+    }
+
+    .page-wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 5rem 1.5rem 3rem;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 2rem;
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(4px);
+      font-size: 0.9rem;
+      color: #fff;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .back-link:hover { background: rgba(0,0,0,0.6); }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .page-header h1 { font-size: 2.2rem; margin-bottom: 0.4rem; }
+    .page-header p { color: rgba(255,255,255,0.65); font-size: 1rem; }
+
+    .section-title {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.35);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin: 2rem 0 1rem;
+    }
+
+    .member-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .member-list li {
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(10px);
+      border-radius: 12px;
+      padding: 0.9rem 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .member-num {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.35);
+      width: 1.5rem;
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    .member-name { font-weight: 600; font-size: 1rem; }
+    .member-role { font-size: 0.8rem; color: rgba(255,255,255,0.5); margin-top: 0.1rem; }
+
+    @media (max-width: 480px) {
+      .page-header h1 { font-size: 1.5rem; }
+      .page-wrap { padding: 4rem 1rem 2rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrap">
+    <a href="index.html" class="back-link">← Home</a>
+
+    <div class="page-header">
+      <h1>About MPS 17</h1>
+      <p>Members of MPS since Generation 17</p>
+    </div>
+
+    <div class="section-title">Members</div>
+    <ul class="member-list" id="member-list">
+      <!-- populated from members.json -->
+    </ul>
+  </div>
+
+  <script>
+    fetch("members.json")
+      .then(r => r.json())
+      .then(members => {
+        document.getElementById("member-list").innerHTML = members.map((m, i) => `
+          <li>
+            <span class="member-num">${i + 1}</span>
+            <div>
+              <div class="member-name">${m.name}</div>
+              <div class="member-role">${m.role}</div>
+            </div>
+          </li>
+        `).join("");
+      });
+  </script>
+</body>
+</html>
