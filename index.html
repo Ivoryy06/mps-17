@@ -242,6 +242,26 @@
       color: #ddd;
     }
 
+    .bio-socials {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      margin-top: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .bio-socials a {
+      padding: 0.3rem 0.8rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      font-size: 0.8rem;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .bio-socials a:hover { background: rgba(255,255,255,0.25); }
+
     .toggle-bio {
       margin-top: 0.5rem;
       background: rgba(255,255,255,0.1);
@@ -361,7 +381,12 @@ document.addEventListener("DOMContentLoaded", () => {
         <li data-link="${m.page}">
           <h3>${m.name}<br>${m.role}</h3>
           ${m.widget ? `<div class="insta-single"><iframe src="https://snapwidget.com/embed/${m.widget}" class="snapwidget-widget" allowtransparency="true" frameborder="0" scrolling="no" style="border:none;overflow:hidden;width:100%;" title="Posts from Instagram"></iframe></div>` : `<img class="lazy" src="placeholder.jpg" data-src="placeholder.jpg">`}
-          <div class="bio">(BIO goes here)</div>
+          <div class="bio">
+            <p>(BIO goes here)</p>
+            <div class="bio-socials">
+              ${m.instagram ? `<a href="${m.instagram}" target="_blank" onclick="event.stopPropagation()">📷 Instagram</a>` : ""}
+            </div>
+          </div>
           <button class="toggle-bio">Read More</button>
         </li>`).join("");
 
@@ -398,7 +423,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll(".toggle-bio").forEach(btn => {
       btn.addEventListener("click", e => {
         e.stopPropagation();
-        const bio = btn.previousElementSibling;
+        const bio = btn.closest("li").querySelector(".bio");
         const open = bio.style.display === "block";
         bio.style.display = open ? "none" : "block";
         btn.textContent = open ? "Read More" : "Read Less";
