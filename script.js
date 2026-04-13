@@ -131,4 +131,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  /* ===== VISITOR COUNTER (hits.sh) ===== */
+  const counterEl = document.getElementById("visitor-count");
+  if (counterEl) {
+    fetch("https://hits.sh/ivoryy06.github.io/mps17.json")
+      .then(r => r.json())
+      .then(d => { counterEl.textContent = d.count ?? d.total ?? "—"; })
+      .catch(() => { counterEl.textContent = "—"; });
+  }
+
 });

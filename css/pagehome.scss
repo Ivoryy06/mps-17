@@ -7,6 +7,13 @@ $overlay: rgba(0,0,0,0.4);
 $blur: blur(6px);
 $radius-pill: 999px;
 $radius-card: 12px;
+$radius-sm: 5px;
+$transition-base: 0.2s ease;
+$transition-card: 0.3s ease;
+$font-stack: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+$z-hero: 2;
+$z-nav: 3;
+$z-modal: 999;
 
 // Mixins
 @mixin glass($bg, $blur: blur(4px)) {
@@ -22,12 +29,22 @@ $radius-card: 12px;
   cursor: pointer;
 }
 
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin transition($props...) {
+  transition: $props;
+}
+
 /* ===== RESET ===== */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
   min-height: 100vh;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: $font-stack;
   color: #fff;
   background-color: $bg-dark;
 
@@ -63,7 +80,7 @@ body {
 
   header {
     position: relative;
-    z-index: 2;
+    z-index: $z-hero;
     margin-bottom: 2rem;
   }
 
@@ -76,7 +93,7 @@ body {
   top: 1.2rem; right: 1.5rem;
   display: flex;
   gap: 0.75rem;
-  z-index: 3;
+  z-index: $z-nav;
 
   a {
     @include pill-btn(rgba(0,0,0,0.35));
@@ -85,7 +102,7 @@ body {
     color: white;
     text-decoration: none;
     white-space: nowrap;
-    transition: background 0.2s ease;
+    @include transition(background $transition-base);
     &:hover { background: rgba(0,0,0,0.55); opacity: 0.8; }
   }
 }
@@ -123,12 +140,12 @@ body {
     text-align: center;
     opacity: 0;
     transform: translateY(30px);
-    transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s ease;
+    @include transition(opacity 0.5s ease, transform 0.5s ease, box-shadow $transition-card);
 
     &.visible { opacity: 1; transform: translateY(0); }
     &:hover { transform: translateY(-8px) scale(1.02) !important; box-shadow: 0 15px 30px rgba(0,0,0,0.3); }
 
-    img { width: 100%; border-radius: 6px; margin-top: 0.5rem; display: block; }
+    img { width: 100%; border-radius: $radius-sm; margin-top: 0.5rem; display: block; }
   }
 }
 
@@ -181,15 +198,16 @@ body {
   margin-top: 0.5rem;
   background: rgba(255,255,255,0.1);
   color: white; border: none;
-  border-radius: 5px; padding: 0.4rem 0.8rem; cursor: pointer;
+  border-radius: $radius-sm; padding: 0.4rem 0.8rem; cursor: pointer;
 }
 
 /* ===== LIGHTBOX ===== */
 .lightbox {
   display: none; position: fixed; inset: 0;
   background: rgba(0,0,0,0.9);
-  justify-content: center; align-items: center; z-index: 999;
-  img { max-width: 90%; max-height: 90%; border-radius: 8px; }
+  @include flex-center;
+  z-index: $z-modal;
+  img { max-width: 90%; max-height: 90%; border-radius: $radius-card; }
 }
 
 /* ===== UI VISIBILITY ===== */
@@ -197,7 +215,7 @@ body {
 .mobile-ui  { display: none; }
 
 /* ===== LAZY ===== */
-.lazy { opacity: 0; transition: opacity 0.6s ease; &.loaded { opacity: 1; } }
+.lazy { opacity: 0; @include transition(opacity 0.6s ease); &.loaded { opacity: 1; } }
 
 /* ===== TYPING ===== */
 .typing {
