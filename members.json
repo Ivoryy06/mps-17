@@ -3,6 +3,6 @@
   { "name": "Fano", "role": "Photographer + Videographer", "page": "pages/member2.html", "widget": null, "instagram": "#", "gen": 17 },
   { "name": "Dyon", "role": "Photographer", "page": "pages/member3.html", "widget": null, "instagram": "#", "gen": 17 },
   { "name": "Kenny", "role": "Photographer", "page": "pages/member4.html", "widget": null, "instagram": "#", "gen": 17 },
-  { "name": "Lingar", "role": "Photographer", "page": "pages/member5.html", "widget": null, "instagram": "#", "gen": 17 },
+  { "name": "Linggar", "role": "Photographer", "page": "pages/member5.html", "widget": null, "photo": "pictures/member5/m5photo.jpg", "instagram": "#", "gen": 17 },
   { "name": "Dennis", "role": "Photographer", "page": "pages/member6.html", "widget": null, "instagram": "#", "gen": 17 }
 ]
