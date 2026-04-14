@@ -60,7 +60,8 @@
       margin-bottom: 2rem;
     }
 
-    .filter-bar button {
+    .filter-bar button,
+    .filter-btn {
       padding: 0.4rem 1rem;
       border-radius: 999px;
       border: none;
@@ -73,7 +74,9 @@
     }
 
     .filter-bar button:hover,
-    .filter-bar button.active {
+    .filter-bar button.active,
+    .filter-btn:hover,
+    .filter-btn.active {
       background: rgba(255,255,255,0.3);
     }
 
@@ -142,11 +145,11 @@
       <p>Works from all Marsudirini Photography Students members</p>
     </div>
 
-    <div class="filter-bar" id="filter-bar">
-      <button class="active" data-filter="all">All</button>
-    </div>
+    <!-- Gen filter -->
+    <div class="filter-bar" id="gen-filter-bar"></div>
 
-    <input type="text" id="gallery-search" placeholder="Search member..." oninput="searchGallery()" style="display:block;margin:0 auto 1.5rem;padding:0.5rem 1rem;border-radius:999px;border:none;background:rgba(255,255,255,0.12);color:#fff;font-size:0.95rem;width:100%;max-width:320px;backdrop-filter:blur(4px);outline:none;">
+    <!-- Member filter (optional) -->
+    <div class="filter-bar" id="member-filter-bar" style="margin-top:-1rem;"></div>
 
     <div class="masonry" id="masonry"></div>
   </div>
@@ -162,19 +165,61 @@
   </footer>
 
   <script>
+    let activeGen = "all";
+    let activeMember = "all";
+
     fetch("members.json")
       .then(r => r.json())
       .then(members => {
         const masonry = document.getElementById("masonry");
-        const filterBar = document.getElementById("filter-bar");
+        const genBar = document.getElementById("gen-filter-bar");
+        const memberBar = document.getElementById("member-filter-bar");
 
-        // Build filter buttons
+        // Gen filter buttons
+        const gens = ["all", ...new Set(members.map(m => m.gen).sort())];
+        gens.forEach(g => {
+          const btn = document.createElement("button");
+          btn.textContent = g === "all" ? "All Gens" : `Angkatan ${g}`;
+          btn.className = "filter-btn" + (g === "all" ? " active" : "");
+          btn.addEventListener("click", () => {
+            genBar.querySelectorAll("button").forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            activeGen = g;
+            activeMember = "all";
+            // Reset member filter
+            memberBar.querySelectorAll("button").forEach(b => b.classList.remove("active"));
+            memberBar.querySelector("[data-member='all']").classList.add("active");
+            applyFilter();
+          });
+          btn.dataset.gen = g;
+          genBar.appendChild(btn);
+        });
+
+        // Member filter buttons
+        const allMemberBtn = document.createElement("button");
+        allMemberBtn.textContent = "All Members";
+        allMemberBtn.className = "filter-btn active";
+        allMemberBtn.dataset.member = "all";
+        allMemberBtn.addEventListener("click", () => {
+          memberBar.querySelectorAll("button").forEach(b => b.classList.remove("active"));
+          allMemberBtn.classList.add("active");
+          activeMember = "all";
+          applyFilter();
+        });
+        memberBar.appendChild(allMemberBtn);
+
         members.forEach(m => {
           const btn = document.createElement("button");
           btn.textContent = m.name;
-          btn.dataset.filter = m.name;
-          btn.addEventListener("click", () => setFilter(m.name, btn));
-          filterBar.appendChild(btn);
+          btn.dataset.member = m.name;
+          btn.className = "filter-btn";
+          btn.addEventListener("click", () => {
+            memberBar.querySelectorAll("button").forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            activeMember = m.name;
+            applyFilter();
+          });
+          memberBar.appendChild(btn);
         });
 
         // Build masonry items
@@ -183,36 +228,25 @@
           const item = document.createElement("div");
           item.className = "masonry-item";
           item.dataset.member = m.name;
+          item.dataset.gen = m.gen;
           item.innerHTML = `
             <iframe src="https://snapwidget.com/embed/${m.widget}"
               allowtransparency="true" frameborder="0" scrolling="no"
               title="${m.name}'s posts"></iframe>
-            <div class="member-label">${m.name} · ${m.role}</div>
+            <div class="member-label">${m.name} · Gen ${m.gen}</div>
           `;
           masonry.appendChild(item);
         });
 
-        function setFilter(filter, activeBtn) {
-          document.querySelectorAll(".filter-bar button").forEach(b => b.classList.remove("active"));
-          activeBtn.classList.add("active");
+        function applyFilter() {
           document.querySelectorAll(".masonry-item").forEach(item => {
-            item.style.display = (filter === "all" || item.dataset.member === filter) ? "" : "none";
+            const genMatch = activeGen === "all" || parseInt(item.dataset.gen) === activeGen;
+            const memberMatch = activeMember === "all" || item.dataset.member === activeMember;
+            item.style.display = (genMatch && memberMatch) ? "" : "none";
           });
         }
-
-        document.querySelector("[data-filter='all']").addEventListener("click", function() {
-          setFilter("all", this);
-        });
       });
 
-    function searchGallery() {
-      const q = document.getElementById("gallery-search").value.toLowerCase();
-      document.querySelectorAll(".masonry-item").forEach(item => {
-        item.style.display = item.dataset.member.toLowerCase().includes(q) ? "" : "none";
-      });
-    }
-
-    // Lightbox for any images
     const lightbox = document.getElementById("lightbox");
     const lightboxImg = document.getElementById("lightbox-img");
     document.addEventListener("click", e => {
