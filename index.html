@@ -10,14 +10,21 @@
   <!-- Open Graph -->
   <meta property="og:title" content="Marsudirini Photography Students">
   <meta property="og:description" content="Portfolio of MPS Generation 17 photographers and videographers.">
-  <meta property="og:image" content="https://ivoryy06.github.io/mps17/pictures/background.jpg">
-  <meta property="og:url" content="https://ivoryy06.github.io/mps17">
+  <meta property="og:image" content="https://ivoryy06.github.io/mps/pictures/background.jpg">
+  <meta property="og:url" content="https://ivoryy06.github.io/mps">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
 
   <!-- PWA -->
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#111111">
+  
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/mps/sw.js')
+        .catch(error => console.warn('SW registration failed:', error));
+    }
+  </script>
 
   <link rel="stylesheet" href="css/pagehome.css?v=7">
 
@@ -385,7 +392,7 @@
 
   <header>
     <h1>Marsudirini Photography Students</h1>
-    <p>Portfolio anggota MPS angkatan: <span id="active-gen">17</span></p>
+    <p>Save every second of our journey, for our future. Generation: <span id="active-gen">17</span></p>
     <div class="gen-filter" id="gen-filter">
       <button class="gen-btn" data-gen="16">Angkatan 16</button>
       <button class="gen-btn active" data-gen="17">Angkatan 17</button>

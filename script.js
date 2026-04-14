@@ -8,18 +8,29 @@ document.addEventListener("DOMContentLoaded", () => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const img = entry.target;
-          img.src = img.dataset.src;
-          img.onload = () => img.classList.add("loaded");
-          lazyObserver.unobserve(img);
+          const src = img.dataset.src;
+          
+          if (src) {
+            img.src = src;
+            img.onload = () => img.classList.add("loaded");
+            img.onerror = () => {
+              img.classList.add("error");
+              console.warn(`Failed to load image: ${src}`);
+            };
+            lazyObserver.unobserve(img);
+          }
         }
       });
-    });
+    }, { rootMargin: '50px' });
 
     lazyImages.forEach(img => lazyObserver.observe(img));
   } else {
     lazyImages.forEach(img => {
-      img.src = img.dataset.src;
-      img.classList.add("loaded");
+      const src = img.dataset.src;
+      if (src) {
+        img.src = src;
+        img.classList.add("loaded");
+      }
     });
   }
 
@@ -36,23 +47,36 @@ document.addEventListener("DOMContentLoaded", () => {
     img.addEventListener("click", e => {
       e.stopPropagation();
 
-      const carousel = img.closest(".insta-carousel");
-      currentCarousel = Array.from(carousel.querySelectorAll("img"));
-      currentIndex = currentCarousel.indexOf(img);
+      try {
+        const carousel = img.closest(".insta-carousel");
+        if (!carousel) return;
+        
+        currentCarousel = Array.from(carousel.querySelectorAll("img"));
+        currentIndex = currentCarousel.indexOf(img);
 
-      openModal();
+        if (currentIndex !== -1) openModal();
+      } catch (error) {
+        console.error("Error opening modal:", error);
+      }
     });
   });
 
   function openModal() {
+    if (!modal) return;
     modal.style.display = "flex";
     updateModal();
   }
 
   function updateModal() {
+    if (!modalImg || currentIndex < 0 || currentIndex >= currentCarousel.length) return;
+    
     const img = currentCarousel[currentIndex];
     modalImg.src = img.src;
-    modalCaption.textContent = img.alt || "";
+    modalImg.onerror = () => console.warn(`Failed to load modal image: ${img.src}`);
+    
+    if (modalCaption) {
+      modalCaption.textContent = img.alt || "";
+    }
   }
 
   modalClose?.addEventListener("click", () => modal.style.display = "none");
@@ -62,14 +86,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.addEventListener("keydown", e => {
     if (modal?.style.display === "flex") {
-      if (e.key === "ArrowRight") {
-        currentIndex = (currentIndex + 1) % currentCarousel.length;
-        updateModal();
-      } else if (e.key === "ArrowLeft") {
-        currentIndex = (currentIndex - 1 + currentCarousel.length) % currentCarousel.length;
-        updateModal();
-      } else if (e.key === "Escape") {
-        modal.style.display = "none";
+      try {
+        if (e.key === "ArrowRight") {
+          currentIndex = (currentIndex + 1) % currentCarousel.length;
+          updateModal();
+        } else if (e.key === "ArrowLeft") {
+          currentIndex = (currentIndex - 1 + currentCarousel.length) % currentCarousel.length;
+          updateModal();
+        } else if (e.key === "Escape") {
+          modal.style.display = "none";
+        }
+      } catch (error) {
+        console.error("Error handling keyboard navigation:", error);
       }
     }
   });
@@ -134,10 +162,27 @@ document.addEventListener("DOMContentLoaded", () => {
   /* ===== VISITOR COUNTER (hits.sh) ===== */
   const counterEl = document.getElementById("visitor-count");
   if (counterEl) {
-    fetch("https://hits.sh/ivoryy06.github.io/mps17.json")
-      .then(r => r.json())
-      .then(d => { counterEl.textContent = d.count ?? d.total ?? "—"; })
-      .catch(() => { counterEl.textContent = "—"; });
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 5000);
+    
+    fetch("https://hits.sh/ivoryy06.github.io/mps.json", {
+      signal: controller.signal
+    })
+      .then(r => {
+        clearTimeout(timeoutId);
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        return r.json();
+      })
+      .then(d => { 
+        counterEl.textContent = d.count ?? d.total ?? "—"; 
+      })
+      .catch(error => { 
+        clearTimeout(timeoutId);
+        counterEl.textContent = "—";
+        if (error.name !== 'AbortError') {
+          console.warn("Visitor counter failed:", error.message);
+        }
+      });
   }
 
 });

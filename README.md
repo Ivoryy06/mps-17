@@ -69,7 +69,7 @@ Not active on GitHub Pages (no PHP support). Reads and increments a `visitors.tx
 The footer shows an all-time visit count powered by [hits.sh](https://hits.sh) — no server required. The count is fetched on every page load via:
 
 ```js
-fetch("https://hits.sh/ivoryy06.github.io/mps17.json")
+fetch("https://hits.sh/ivoryy06.github.io/mps.json")
   .then(r => r.json())
   .then(d => { counterEl.textContent = d.count ?? d.total ?? "—"; });
 ```

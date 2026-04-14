@@ -13,6 +13,25 @@ body {
   color-scheme: only light;
 }
 
+/* ===== PERFORMANCE OPTIMIZATIONS ===== */
+img {
+  will-change: auto;
+}
+
+.lazy {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.lazy.loaded {
+  opacity: 1;
+}
+
+.lazy.error {
+  opacity: 0.5;
+  background: #333;
+}
+
 /* ===== HERO SECTION ===== */
 .hero {
   min-height: auto;
