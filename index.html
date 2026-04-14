@@ -440,7 +440,7 @@ document.addEventListener("DOMContentLoaded", () => {
       ul.innerHTML = members.map(m => `
         <li data-link="${m.page}" data-gen="${m.gen || 17}">
           <h3>${m.name}<br>${m.role}</h3>
-          ${m.widget ? `<div class="insta-single"><iframe src="https://snapwidget.com/embed/${m.widget}" class="snapwidget-widget" allowtransparency="true" frameborder="0" scrolling="no" style="border:none;overflow:hidden;width:100%;" title="Posts from Instagram"></iframe></div>` : `<img class="lazy" src="placeholder.jpg" data-src="placeholder.jpg">`}
+          ${m.widget ? `<div class="insta-single"><iframe src="https://snapwidget.com/embed/${m.widget}" class="snapwidget-widget" allowtransparency="true" frameborder="0" scrolling="no" style="border:none;overflow:hidden;width:100%;" title="Posts from Instagram"></iframe></div>` : `<img class="lazy" src="${m.photo || 'placeholder.jpg'}" data-src="${m.photo || 'placeholder.jpg'}">`}
           <div class="bio">
             <p>(BIO goes here)</p>
             <div class="bio-socials">
