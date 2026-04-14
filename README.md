@@ -1,6 +1,6 @@
-# MPS 17 Portfolio
+# MPS Portfolio
 
-A portfolio website showcasing the members of MPS Angkatan 17.
+A portfolio website for Marsudirini Photography Students, showcasing members across generations.
 
 ## 🌐 Website
 
@@ -9,27 +9,41 @@ A portfolio website showcasing the members of MPS Angkatan 17.
 ## Structure
 
 ```
-mps17/
-├── index.html              # Home page
-├── pages/                  # Member detail pages
+mps/
+├── index.html              # Home page — member grid, gen filter, search
+├── gallery.html            # Photo gallery
+├── about.html              # About page
+├── credits.html            # Credits page
+├── contact.html            # Contact page
+├── 404.html                # Custom 404 page
+├── pages/
+│   ├── index.html          # Members index (alternate entry)
+│   └── member1–10.html     # Individual member profile pages
 ├── css/
-│   ├── pagehome.scss       # Main stylesheet (SCSS source)
-│   ├── pagehome.css        # Compiled CSS (commit this)
-│   └── member*.css         # Per-member styles
+│   ├── pagehome.css        # Home page styles
+│   └── member-shared.css   # Shared styles for member pages
 ├── pictures/               # Images and SVGs
-├── script.js               # Shared JS (lazy load, lightbox, counter)
-├── members.json            # Member data (name, role, page, widget)
+├── script.js               # Shared JS (lazy load, lightbox, tilt, visitor counter)
+├── members.json            # Member data (name, role, page, widget, gen)
 ├── generate_members.cpp    # Regenerates members.json from C++ source
 ├── validate_members.py     # Validates members.json fields
-├── counter.php             # Self-hosted visitor counter (PHP, not used on GitHub Pages)
+├── counter.php             # Self-hosted visitor counter (not active on GitHub Pages)
 └── manifest.json           # PWA manifest
 ```
 
 ## Scripts
 
+### `script.js` — shared client-side logic
+
+- **Lazy loading** — member card images load only when scrolled into view via `IntersectionObserver`
+- **Lightbox** — clicking carousel images opens a fullscreen modal; arrow keys navigate between images
+- **Bio toggle** — "Read More / Read Less" button on each member card
+- **3D tilt effect** — member cards tilt on mouse movement using CSS `rotateX/Y`
+- **Visitor counter** — fetches the all-time visit count from [hits.sh](https://hits.sh) and displays it in the footer
+
 ### `generate_members.cpp` — regenerate members.json
 
-Edit the member list directly in the source, then compile and run:
+Edit the member list in the source, then compile and run:
 
 ```bash
 g++ -o generate_members generate_members.cpp
@@ -37,37 +51,27 @@ g++ -o generate_members generate_members.cpp
 # → members.json updated
 ```
 
-Run this whenever you add, remove, or rename a member.
-
 ### `validate_members.py` — check members.json
 
-Validates that every member has `name`, `role`, and `page` fields:
+Validates that every member entry has `name`, `role`, and `page` fields:
 
 ```bash
 python validate_members.py
-# OK — 6 members valid.
-```
-
-Run this after editing `members.json` manually or after regenerating it.
-
-### `css/pagehome.scss` — compile SCSS
-
-The SCSS source uses variables, mixins (`glass`, `pill-btn`, `flex-center`, `transition`), and nesting. Compile to CSS before committing:
-
-```bash
-sass css/pagehome.scss css/pagehome.css
-# or watch for changes:
-sass --watch css/pagehome.scss:css/pagehome.css
+# OK — N members valid.
 ```
 
 ### `counter.php` — visitor counter (self-hosted only)
 
-This file is **not active on GitHub Pages** (no PHP support). Visitor counts are fetched client-side from [hits.sh](https://hits.sh) and displayed in the footer.
-
-To self-host the counter on your own PHP server:
-1. Deploy `counter.php` alongside the site
-2. Update the fetch URL in `script.js` to point to your server
+Not active on GitHub Pages (no PHP support). Reads and increments a `visitors.txt` file, returning `{ "visitors": N }` as JSON. To self-host, deploy this file on a PHP server and update the fetch URL in `script.js`.
 
 ## Visitor Counter
 
-The footer shows a live visit count powered by [hits.sh](https://hits.sh) — no server required. It increments automatically on each page load.
+The footer shows an all-time visit count powered by [hits.sh](https://hits.sh) — no server required. The count is fetched on every page load via:
+
+```js
+fetch("https://hits.sh/ivoryy06.github.io/mps17.json")
+  .then(r => r.json())
+  .then(d => { counterEl.textContent = d.count ?? d.total ?? "—"; });
+```
+
+It increments automatically each time the page is visited and persists across sessions.
