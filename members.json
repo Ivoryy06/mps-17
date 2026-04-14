@@ -8,5 +8,7 @@
   { "name": "Darren", "role": "Photographer", "page": "pages/member7.html", "widget": null, "instagram": "#", "gen": 17 },
   { "name": "Charis", "role": "Photographer", "page": "pages/member8.html", "widget": null, "instagram": "#", "gen": 17 },
   { "name": "Raka", "role": "Photographer", "page": "pages/member9.html", "widget": null, "instagram": "#", "gen": 17 },
-  { "name": "Jose", "role": "Photographer", "page": "pages/member10.html", "widget": null, "instagram": "#", "gen": 17 }
+  { "name": "Jose", "role": "Photographer", "page": "pages/member10.html", "widget": null, "instagram": "#", "gen": 17 },
+  { "name": "Gen 16 – Coming Soon", "role": "TBA", "page": "#", "widget": null, "instagram": "#", "gen": 16 },
+  { "name": "Gen 18 – Coming Soon", "role": "TBA", "page": "#", "widget": null, "instagram": "#", "gen": 18 }
 ]
