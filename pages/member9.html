@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Raka - Profile</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/member-shared.css">
+</head>
+<body>
+  <div class="hero-bg"></div>
+  <main class="member">
+    <h1 class="member-title">Raka</h1>
+    <nav class="member-nav">
+      <a href="index.html">← Home</a>
+      <button id="bio-toggle">Show Bio</button>
+      <button id="contact-toggle">Contact</button>
+    </nav>
+    <p class="bio-text" id="bio-text">Bio coming soon.</p>
+    <div class="gallery"></div>
+    <div class="member-pagination">
+      <a href="member6.html">← Member 10</a>
+      <span class="spacer"></span>
+      <a href="member8.html">Member 10 →</a>
+    </div>
+  </main>
+  <div class="lightbox" id="lightbox"><img id="lightbox-img" alt=""></div>
+  <div class="popup" id="contact-popup">
+    <div class="popup-content">
+      <h2>Contact</h2>
+      <div class="contact-socials"></div>
+      <button class="popup-close">Close</button>
+    </div>
+  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const lightbox = document.getElementById("lightbox");
+      const lightboxImg = document.getElementById("lightbox-img");
+      document.querySelectorAll(".gallery img").forEach(img => {
+        img.addEventListener("click", () => { lightbox.style.display = "flex"; lightboxImg.src = img.src; });
+      });
+      lightbox.addEventListener("click", () => { lightbox.style.display = "none"; lightboxImg.src = ""; });
+      const bioBtn = document.getElementById("bio-toggle");
+      const bioText = document.getElementById("bio-text");
+      bioBtn.addEventListener("click", () => {
+        const visible = bioText.style.display === "block";
+        bioText.style.display = visible ? "none" : "block";
+        bioBtn.textContent = visible ? "Show Bio" : "Hide Bio";
+      });
+      const contactPopup = document.getElementById("contact-popup");
+      document.getElementById("contact-toggle").addEventListener("click", () => { contactPopup.style.display = "flex"; });
+      contactPopup.querySelector(".popup-close").addEventListener("click", () => { contactPopup.style.display = "none"; });
+      contactPopup.addEventListener("click", e => { if (e.target === contactPopup) contactPopup.style.display = "none"; });
+    });
+  </script>
+  <script>
+    document.querySelectorAll("a[href]").forEach(a => {
+      const href = a.getAttribute("href");
+      if (!href.startsWith("http") && !href.startsWith("#")) {
+        a.addEventListener("click", e => {
+          e.preventDefault();
+          document.body.style.cssText += ";animation:pageFadeOut 0.25s ease forwards";
+          setTimeout(() => location.href = href, 250);
+        });
+      }
+    });
+  </script>
+  <style>@keyframes pageFadeOut{to{opacity:0;transform:translateY(-8px)}}</style>
+</body>
+</html>

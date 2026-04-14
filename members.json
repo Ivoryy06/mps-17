@@ -4,5 +4,9 @@
   { "name": "Dyon", "role": "Photographer", "page": "pages/member3.html", "widget": null, "instagram": "#", "gen": 17 },
   { "name": "Kenny", "role": "Photographer", "page": "pages/member4.html", "widget": null, "instagram": "#", "gen": 17 },
   { "name": "Linggar", "role": "Photographer", "page": "pages/member5.html", "widget": null, "photo": "pictures/member5/m5photo.jpg", "instagram": "#", "gen": 17 },
-  { "name": "Dennis", "role": "Photographer", "page": "pages/member6.html", "widget": null, "instagram": "#", "gen": 17 }
+  { "name": "Dennis", "role": "Photographer", "page": "pages/member6.html", "widget": null, "instagram": "#", "gen": 17 },
+  { "name": "Darren", "role": "Photographer", "page": "pages/member7.html", "widget": null, "instagram": "#", "gen": 17 },
+  { "name": "Charis", "role": "Photographer", "page": "pages/member8.html", "widget": null, "instagram": "#", "gen": 17 },
+  { "name": "Raka", "role": "Photographer", "page": "pages/member9.html", "widget": null, "instagram": "#", "gen": 17 },
+  { "name": "Jose", "role": "Photographer", "page": "pages/member10.html", "widget": null, "instagram": "#", "gen": 17 }
 ]
