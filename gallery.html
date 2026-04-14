@@ -222,40 +222,20 @@
           memberBar.appendChild(btn);
         });
 
-        const FALLBACK_PHOTO = "pictures/member5/m5photo.jpg";
-
-        // Build masonry items
+        // Build masonry items — one card per photo
         members.forEach(m => {
-          const item = document.createElement("div");
-          item.className = "masonry-item";
-          item.dataset.member = m.name;
-          item.dataset.gen = m.gen;
-
-          if (m.widget) {
+          if (!m.porto || m.porto.length === 0) return;
+          m.porto.forEach(src => {
+            const item = document.createElement("div");
+            item.className = "masonry-item";
+            item.dataset.member = m.name;
+            item.dataset.gen = m.gen;
             item.innerHTML = `
-              <iframe src="https://snapwidget.com/embed/${m.widget}"
-                allowtransparency="true" frameborder="0" scrolling="no"
-                title="${m.name}'s posts"></iframe>
+              <img src="${src}" alt="${m.name}" style="width:100%;display:block;">
               <div class="member-label">${m.name} · Gen ${m.gen}</div>
             `;
-          } else if (m.gen === 16 || m.gen === 18) {
-            item.innerHTML = `
-              <div style="min-height:180px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0.5rem;padding:2rem;opacity:0.5;">
-                <span style="font-size:2rem;">📷</span>
-                <span style="font-size:0.9rem;">Coming Soon</span>
-              </div>
-              <div class="member-label">${m.name}</div>
-            `;
-          } else {
-            // Gen 17 – show Linggar's photo as placeholder
-            const photo = m.photo || FALLBACK_PHOTO;
-            item.innerHTML = `
-              <img src="${photo}" alt="${m.name}" style="width:100%;display:block;object-fit:cover;">
-              <div class="member-label">${m.name} · Gen ${m.gen}</div>
-            `;
-          }
-
-          masonry.appendChild(item);
+            masonry.appendChild(item);
+          });
         });
 
         function applyFilter() {
