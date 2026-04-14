@@ -175,8 +175,38 @@
         const genBar = document.getElementById("gen-filter-bar");
         const memberBar = document.getElementById("member-filter-bar");
 
+        function buildMemberBar(genFilter) {
+          memberBar.innerHTML = "";
+          const allBtn = document.createElement("button");
+          allBtn.textContent = "All Members";
+          allBtn.className = "filter-btn active";
+          allBtn.dataset.member = "all";
+          allBtn.addEventListener("click", () => {
+            memberBar.querySelectorAll("button").forEach(b => b.classList.remove("active"));
+            allBtn.classList.add("active");
+            activeMember = "all";
+            applyFilter();
+          });
+          memberBar.appendChild(allBtn);
+
+          const filtered = genFilter === "all" ? members : members.filter(m => m.gen === Number(genFilter));
+          filtered.forEach(m => {
+            const btn = document.createElement("button");
+            btn.textContent = m.name;
+            btn.dataset.member = m.name;
+            btn.className = "filter-btn";
+            btn.addEventListener("click", () => {
+              memberBar.querySelectorAll("button").forEach(b => b.classList.remove("active"));
+              btn.classList.add("active");
+              activeMember = m.name;
+              applyFilter();
+            });
+            memberBar.appendChild(btn);
+          });
+        }
+
         // Gen filter buttons
-        const gens = ["all", ...new Set(members.map(m => m.gen).sort())];
+        const gens = ["all", ...new Set(members.map(m => m.gen).sort((a,b) => a-b))];
         gens.forEach(g => {
           const btn = document.createElement("button");
           btn.textContent = g === "all" ? "All Gens" : `Angkatan ${g}`;
@@ -186,41 +216,16 @@
             btn.classList.add("active");
             activeGen = g;
             activeMember = "all";
-            // Reset member filter
             memberBar.querySelectorAll("button").forEach(b => b.classList.remove("active"));
-            memberBar.querySelector("[data-member='all']").classList.add("active");
+            memberBar.querySelector("button").classList.add("active");
+            buildMemberBar(g);
             applyFilter();
           });
           btn.dataset.gen = g;
           genBar.appendChild(btn);
         });
 
-        // Member filter buttons
-        const allMemberBtn = document.createElement("button");
-        allMemberBtn.textContent = "All Members";
-        allMemberBtn.className = "filter-btn active";
-        allMemberBtn.dataset.member = "all";
-        allMemberBtn.addEventListener("click", () => {
-          memberBar.querySelectorAll("button").forEach(b => b.classList.remove("active"));
-          allMemberBtn.classList.add("active");
-          activeMember = "all";
-          applyFilter();
-        });
-        memberBar.appendChild(allMemberBtn);
-
-        members.forEach(m => {
-          const btn = document.createElement("button");
-          btn.textContent = m.name;
-          btn.dataset.member = m.name;
-          btn.className = "filter-btn";
-          btn.addEventListener("click", () => {
-            memberBar.querySelectorAll("button").forEach(b => b.classList.remove("active"));
-            btn.classList.add("active");
-            activeMember = m.name;
-            applyFilter();
-          });
-          memberBar.appendChild(btn);
-        });
+        buildMemberBar("all");
 
         // Build masonry items — one card per photo
         members.forEach(m => {
