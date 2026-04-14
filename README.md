@@ -4,7 +4,7 @@ A portfolio website for Marsudirini Photography Students, showcasing members acr
 
 ## 🌐 Website
 
-**[https://ivoryy06.github.io/mps17](https://ivoryy06.github.io/mps17)**
+**[https://ivoryy06.github.io/mps](https://ivoryy06.github.io/mps)**
 
 ## Structure
 
