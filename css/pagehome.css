@@ -1,4 +1,4 @@
-/* ===== RESET ===== */
+
 * {
   margin: 0;
   padding: 0;
@@ -13,7 +13,7 @@ body {
   color-scheme: only light;
 }
 
-/* ===== PERFORMANCE OPTIMIZATIONS ===== */
+
 img {
   will-change: auto;
 }
@@ -32,7 +32,7 @@ img {
   background: #333;
 }
 
-/* ===== HERO SECTION ===== */
+
 .hero {
   min-height: auto;
   position: relative;
@@ -68,7 +68,7 @@ img {
   color: rgba(255,255,255,0.85);
 }
 
-/* ===== HERO LINKS ===== */
+
 .hero-links {
   position: absolute;
   top: 1.2rem;
@@ -96,7 +96,7 @@ img {
   opacity: 0.8;
 }
 
-/* ===== TEAM MEMBERS ===== */
+
 .team {
   position: relative;
   z-index: 2;
@@ -145,13 +145,13 @@ img {
   display: block;
 }
 
-/* ===== SNAPWIDGET FIX (ONLY NECESSARY CHANGE) ===== */
+
 .insta-single {
   width: 100%;
   margin-top: 0.5rem;
   border-radius: 6px;
   overflow: hidden;
-  height: 360px;        /* Lock height to prevent resize gap */
+  height: 360px;        
 }
 
 .insta-single iframe {
@@ -161,7 +161,7 @@ img {
   display: block;
 }
 
-/* ===== INSTAGRAM CAROUSEL ===== */
+
 .insta-carousel {
   display: flex;
   gap: 0.5rem;
@@ -183,7 +183,7 @@ img {
   transition: transform 0.3s ease;
 }
 
-/* ===== BIO & LIGHTBOX ===== */
+
 .bio {
   display: none;
   margin-top: 0.75rem;
@@ -217,11 +217,11 @@ img {
   border-radius: 8px;
 }
 
-/* ===== UI VISIBILITY ===== */
+
 .desktop-ui { display: block; }
 .mobile-ui { display: none; }
 
-/* ===== RESPONSIVE: TABLET ===== */
+
 @media (max-width: 768px) {
   .team ul {
     grid-template-columns: repeat(2, 1fr);
@@ -231,7 +231,7 @@ img {
   .hero h1 { font-size: 2rem; }
 }
 
-/* ===== RESPONSIVE: MOBILE ===== */
+
 @media (max-width: 480px) {
   .desktop-ui { display: none; }
   .mobile-ui { display: block; }
@@ -289,7 +289,7 @@ img {
   }
 }
 
-/* ===== DARK/LIGHT THEME ===== */
+
 body.light {
   background-color: #f0f0f0;
   color: #111;
@@ -314,7 +314,7 @@ body.light .bio { color: #333; }
   backdrop-filter: blur(4px);
 }
 
-/* ===== SEARCH BOX ===== */
+
 .search-box {
   margin-bottom: 1.5rem;
   padding: 0.5rem 1rem;
@@ -335,7 +335,7 @@ body.light .search-box {
 }
 body.light .search-box::placeholder { color: rgba(0,0,0,0.4); }
 
-/* ===== MEMBER COUNT ===== */
+
 .member-count {
   font-size: 1rem;
   background: rgba(255,255,255,0.15);
@@ -344,7 +344,7 @@ body.light .search-box::placeholder { color: rgba(0,0,0,0.4); }
   vertical-align: middle;
 }
 
-/* ===== SCROLL ANIMATION ===== */
+
 .team li {
   opacity: 0;
   transform: translateY(30px);
@@ -370,7 +370,7 @@ body.light .search-box::placeholder { color: rgba(0,0,0,0.4); }
 }
 
 
-/* ===== PAGE TRANSITIONS ===== */
+
 body { animation: pageFadeIn 0.35s ease both; }
 @keyframes pageFadeIn {
   from { opacity: 0; transform: translateY(8px); }

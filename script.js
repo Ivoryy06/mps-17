@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  /* ===== LAZY LOADING ===== */
+  
   const lazyImages = document.querySelectorAll(".lazy");
 
   if ("IntersectionObserver" in window) {
@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /* ===== LIGHTBOX / MODAL CAROUSEL ===== */
+  
   const modal = document.getElementById("insta-modal");
   const modalImg = document.getElementById("modal-img");
   const modalCaption = document.getElementById("modal-caption");
@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  /* ===== BIO TOGGLE ===== */
+  
   document.querySelectorAll(".toggle-bio").forEach(btn => {
     btn.addEventListener("click", e => {
       e.stopPropagation();
@@ -115,7 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  /* ===== MEMBER CARD NAVIGATION ===== */
+  
   document.querySelectorAll(".team li").forEach(card => {
     card.addEventListener("click", e => {
       if (
@@ -128,7 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  /* ===== HAMBURGER MENU ===== */
+  
   const hamburger = document.getElementById("hamburger");
   const mobileMenu = document.getElementById("mobile-menu");
 
@@ -138,7 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.classList.toggle("menu-open", !isOpen);
   });
 
-  /* ===== 3D TILT EFFECT ===== */
+  
   document.querySelectorAll(".team li").forEach(card => {
     card.addEventListener("mousemove", e => {
       const rect = card.getBoundingClientRect();
@@ -159,7 +159,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  /* ===== VISITOR COUNTER (hits.sh) ===== */
+  
   const counterEl = document.getElementById("visitor-count");
   if (counterEl) {
     const controller = new AbortController();
