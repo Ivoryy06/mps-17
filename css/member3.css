@@ -27,7 +27,7 @@ html::before {
   
   background:
     linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
-    url("m3background.jpg") center / cover no-repeat;
+    url("../pictures/member3/m3background.jpg") center / cover no-repeat;
 
   z-index: -3;
 }
